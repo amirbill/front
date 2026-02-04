@@ -63,14 +63,7 @@ const nextConfig: NextConfig = {
     '192.168.1.106:3000',
     '192.168.1.106',
   ],
-  async rewrites() {
-    return [
-      {
-        source: '/api/v1/:path*',
-        destination: 'http://localhost:8000/api/v1/:path*',
-      },
-    ];
-  },
+  // rewrites removed to use direct API connection
 };
 
 export default nextConfig;
