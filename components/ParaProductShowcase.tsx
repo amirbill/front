@@ -47,6 +47,7 @@ interface ParaProductShowcaseProps {
     defaultCategory: string
     categoryType?: "top" | "low" | "top_category" | "low_category" | "subcategory"
     categories?: CategoryConfig[]
+    initialProducts?: ParaProduct[]
     bannerImage?: string
     bannerText?: string
     title?: string
@@ -66,14 +67,16 @@ export function ParaProductShowcase({
     defaultCategory,
     categoryType = "top",
     categories = defaultParaCategories,
+    initialProducts,
     bannerImage,
     bannerText = "Parapharmacie",
     title = "Produits Parapharmacie"
 }: ParaProductShowcaseProps) {
-    const [products, setProducts] = useState<ParaProduct[]>([])
-    const [loading, setLoading] = useState(true)
+    const [products, setProducts] = useState<ParaProduct[]>(initialProducts || [])
+    const [loading, setLoading] = useState(!initialProducts)
     const [activeCategory, setActiveCategory] = useState(defaultCategory)
     const [activeCategoryType, setActiveCategoryType] = useState<"top" | "low" | "top_category" | "low_category" | "subcategory">(categoryType)
+    const [isFirstLoad, setIsFirstLoad] = useState(!!initialProducts)
     const scrollContainerRef = useRef<HTMLDivElement>(null)
 
     // Get the appropriate banner image for the current category
@@ -81,6 +84,12 @@ export function ParaProductShowcase({
 
     useEffect(() => {
         if (!activeCategory) return
+
+        // Skip fetch on first load if we have initial products
+        if (isFirstLoad && products.length > 0) {
+            setIsFirstLoad(false)
+            return
+        }
 
         const fetchProducts = async () => {
             setLoading(true)

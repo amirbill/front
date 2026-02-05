@@ -58,6 +58,7 @@ const nextConfig: NextConfig = {
     ],
   },
   allowedDevOrigins: [
+    'https://back-27em.onrender.com/api/v1/',
     'localhost:3000',
     '127.0.0.1:3000',
     '192.168.1.106:3000',

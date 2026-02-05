@@ -51,16 +51,27 @@ const RankBadge = ({ rank }: { rank: number }) => {
     );
 };
 
-export default function PriceCards() {
+interface PriceCardsProps {
+    initialData?: any[];
+}
+
+export default function PriceCards({ initialData }: PriceCardsProps) {
     const [shops, setShops] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!initialData);
 
     useEffect(() => {
-        const fetchPrices = async () => {
+        const loadPrices = async () => {
             try {
-                const res = await fetch(`${API_URL}/analytics/prices`);
-                if (!res.ok) throw new Error("Failed to fetch prices");
-                const data = await res.json();
+                let data;
+
+                if (initialData) {
+                    data = initialData;
+                } else {
+                    // Fallback fetch removed for security. 
+                    // Data should be provided by Server Component props.
+                    console.warn("PriceCards: No initialData provided");
+                    data = [];
+                }
 
                 // Merge API data with default shops
                 const apiShopsMap = new Map();
@@ -113,8 +124,8 @@ export default function PriceCards() {
             }
         };
 
-        fetchPrices();
-    }, []);
+        loadPrices();
+    }, [initialData]);
 
     // Helper to sort and rank shops
     const getSortedShops = (list: string[]) => {

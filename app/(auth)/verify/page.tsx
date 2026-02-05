@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { Loader2 } from "lucide-react"
-import { authService } from "@/services/auth"
+import { verifyEmailAction } from "@/app/auth-actions"
 
 const verifySchema = z.object({
     code: z.string().min(1, "Le code est requis"),
@@ -42,13 +42,17 @@ function VerifyContent() {
         setError(null)
         setIsLoading(true)
         try {
-            await authService.verifyEmail({ email, code: data.code })
-            setSuccess(true)
-            setTimeout(() => {
-                router.push("/signin")
-            }, 2000)
+            const response = await verifyEmailAction(email, data.code)
+            if (response.success) {
+                setSuccess(true)
+                setTimeout(() => {
+                    router.push("/signin")
+                }, 2000)
+            } else {
+                setError(response.error || "Code invalide")
+            }
         } catch (err: any) {
-            setError(err.response?.data?.detail || "Code invalide")
+            setError("Une erreur est survenue")
         } finally {
             setIsLoading(false)
         }

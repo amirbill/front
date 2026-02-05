@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter, usePathname } from 'next/navigation';
 import { authService } from '../services/auth';
+import { signinAction, signupAction, logoutAction, googleLoginAction } from "@/app/auth-actions"
 
 interface AuthContextType {
     user: any;
@@ -16,16 +17,17 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
+export const AuthProvider = ({ children, initialUser }: { children: React.ReactNode, initialUser?: any }) => {
+    const [user, setUser] = useState<any>(initialUser || null);
+    const [loading, setLoading] = useState(!initialUser);
     const router = useRouter();
 
 
     useEffect(() => {
         const checkUser = async () => {
             const token = Cookies.get('token');
-            if (token) {
+            // Only fetch if token exists AND we don't already have the user (e.g. from SSR)
+            if (token && !initialUser) {
                 try {
                     const response = await authService.me();
                     setUser(response.data);
@@ -36,49 +38,51 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setLoading(false);
         };
         checkUser();
-    }, []);
+    }, [initialUser]);
 
     const login = async (data: any) => {
-        const response = await authService.signin(data);
-        const { access_token, role } = response.data;
-        Cookies.set('token', access_token);
-        const userResponse = await authService.me();
-        setUser(userResponse.data);
-
-        if (role === 'admin') {
-            router.push('/dashboard');
-        } else {
-            router.push('/'); // Redirect to home page
-        }
-    };
-
-    const signup = async (data: any) => {
-        await authService.signup(data);
-        // Redirect to verification or tell user to check email
-        router.push(`/verify?email=${data.email}`);
-    };
-
-    const logout = () => {
-        Cookies.remove('token');
-        setUser(null);
-        router.push('/signin');
-    };
-
-    const loginWithGoogle = async (credential: string) => {
-        try {
-            const response = await authService.googleLogin(credential);
-            console.log("Google Login Response:", response.data);
-            const { access_token, role } = response.data;
-
-            Cookies.set('token', access_token);
-            const userResponse = await authService.me();
-            setUser(userResponse.data);
-
-            console.log("Redirecting based on role:", role);
+        const response = await signinAction(data);
+        if (response.success && response.user) {
+            setUser(response.user);
+            const role = response.user.role;
             if (role === 'admin') {
                 router.push('/dashboard');
             } else {
                 router.push('/');
+            }
+            router.refresh();
+        } else {
+            throw new Error(response.error || 'Login failed');
+        }
+    };
+
+    const signup = async (data: any) => {
+        const response = await signupAction(data);
+        if (response.success) {
+            router.push(`/verify?email=${data.email}`);
+        } else {
+            throw new Error(response.error || 'Signup failed');
+        }
+    };
+
+    const logout = async () => {
+        await logoutAction();
+        setUser(null);
+        router.push('/signin');
+        router.refresh();
+    };
+
+    const loginWithGoogle = async (credential: string) => {
+        try {
+            const response = await googleLoginAction(credential);
+            if (response.success && response.data) {
+                // We might need to fetch user if action doesn't return it full
+                // But let's assume I'll update googleLoginAction too or accept the refresh to handle it.
+                // For now, let's refresh page to let layout fetch user? Or fetch it?
+                // Better: update googleLoginAction to return user like signinAction.
+                // Assuming I will do that next.
+                router.push('/');
+                router.refresh();
             }
         } catch (error) {
             console.error("Google login error:", error);

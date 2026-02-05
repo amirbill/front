@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import { Pencil, Loader2, CheckCircle2, AlertCircle, ShoppingBag, Pill, LayoutDashboard } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
-import { authService } from "@/services/auth"
+import { getMeAction, updateProfileAction, changePasswordAction } from "@/app/auth-actions"
 import { useAuth } from "@/contexts/AuthContext"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
@@ -32,15 +32,18 @@ export default function ProfilePage() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await authService.me()
-                const userData = response.data
-                setProfileData({
-                    nom: userData.full_name || "",
-                    nomUtilisateur: userData.username || "",
-                    email: userData.email || "",
-                    dateNaissance: userData.birthdate || "",
-                    adresse: userData.address || "",
-                })
+                // Use getMeAction instead of authService.me()
+                const response = await getMeAction()
+                if (response.success && response.data) {
+                    const userData = response.data
+                    setProfileData({
+                        nom: userData.full_name || "",
+                        nomUtilisateur: userData.username || "",
+                        email: userData.email || "",
+                        dateNaissance: userData.birthdate || "",
+                        adresse: userData.address || "",
+                    })
+                }
             } catch (error) {
                 console.error("Failed to fetch user data", error)
             } finally {
@@ -63,14 +66,20 @@ export default function ProfilePage() {
         setSaving(true)
         setMessage(null)
         try {
-            await authService.updateProfile({
+            const response = await updateProfileAction({
                 full_name: profileData.nom,
                 username: profileData.nomUtilisateur,
                 email: profileData.email,
                 birthdate: profileData.dateNaissance,
                 address: profileData.adresse
             })
-            setMessage({ type: 'success', text: 'Profil mis à jour avec succès' })
+
+            if (response.success) {
+                setMessage({ type: 'success', text: 'Profil mis à jour avec succès' })
+                // Optionally refresh user context here if needed, but page reload might be enough or separate context update
+            } else {
+                setMessage({ type: 'error', text: response.error || 'Échec de la mise à jour du profil' })
+            }
         } catch (error) {
             setMessage({ type: 'error', text: 'Échec de la mise à jour du profil' })
         } finally {
@@ -86,15 +95,19 @@ export default function ProfilePage() {
         setSaving(true)
         setMessage(null)
         try {
-            await authService.changePassword({
+            const response = await changePasswordAction({
                 current_password: securityData.currentPassword,
                 new_password: securityData.newPassword
             })
-            setMessage({ type: 'success', text: 'Mot de passe mis à jour avec succès' })
-            setSecurityData({ currentPassword: "", newPassword: "" })
+
+            if (response.success) {
+                setMessage({ type: 'success', text: 'Mot de passe mis à jour avec succès' })
+                setSecurityData({ currentPassword: "", newPassword: "" })
+            } else {
+                setMessage({ type: 'error', text: response.error || 'Échec de la mise à jour du mot de passe' })
+            }
         } catch (error: any) {
-            const errorMsg = error.response?.data?.detail || 'Échec de la mise à jour du mot de passe'
-            setMessage({ type: 'error', text: errorMsg })
+            setMessage({ type: 'error', text: 'Une erreur est survenue' })
         } finally {
             setSaving(false)
         }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { API_URL } from "@/lib/api";
 
 // Shop logo mapping
 const SHOP_IMAGES: { [key: string]: string } = {
@@ -43,55 +42,33 @@ interface ShopPriceComparisonTableProps {
     type: "para" | "products";
     title: string;
     accentColor: string;
+    initialCategories?: string[]; // Kept for type compatibility but we expect this to be filled
+    // Map of category -> analytics data (pre-fetched on server)
+    allAnalyticsData?: Record<string, CategoryAnalytics>;
+    /**
+     * @deprecated Use allAnalyticsData instead
+     */
+    initialAnalytics?: CategoryAnalytics;
 }
 
-export function ShopPriceComparisonTable({ type, title, accentColor }: ShopPriceComparisonTableProps) {
-    const [categories, setCategories] = useState<string[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string>("");
-    const [analytics, setAnalytics] = useState<CategoryAnalytics | null>(null);
-    const [loading, setLoading] = useState(false);
+export function ShopPriceComparisonTable({
+    type,
+    title,
+    accentColor,
+    initialCategories = [],
+    allAnalyticsData = {}
+}: ShopPriceComparisonTableProps) {
+    const [categories, setCategories] = useState<string[]>(initialCategories);
+    const [selectedCategory, setSelectedCategory] = useState<string>(
+        initialCategories.length > 0 ? initialCategories[0] : ""
+    );
+    // Since we have all data, we don't need 'loading' state for fetching.
+    // We just look up the data from the prop.
 
-    // Fetch categories on mount
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const res = await fetch(`${API_URL}/${type}/analytics/categories`);
-                if (!res.ok) throw new Error("Failed to fetch categories");
-                const data = await res.json();
-                setCategories(data);
-                if (data.length > 0) {
-                    setSelectedCategory(data[0]);
-                }
-            } catch (error) {
-                console.error("Error fetching analytics categories:", error);
-            }
-        };
-        fetchCategories();
-    }, [type]);
-
-    // Fetch analytics when category changes
-    useEffect(() => {
-        if (!selectedCategory) return;
-
-        const fetchAnalytics = async () => {
-            setLoading(true);
-            try {
-                const res = await fetch(`${API_URL}/${type}/analytics/by-category?category=${encodeURIComponent(selectedCategory)}`);
-                if (!res.ok) throw new Error("Failed to fetch analytics");
-                const data = await res.json();
-                setAnalytics(data);
-            } catch (error) {
-                console.error("Error fetching category analytics:", error);
-                setAnalytics(null);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchAnalytics();
-    }, [selectedCategory, type]);
-
-    // Get all unique shops from analytics
-    const shops = analytics?.shop_rankings || [];
+    // Derived state
+    const analytics = selectedCategory && allAnalyticsData[selectedCategory]
+        ? allAnalyticsData[selectedCategory]
+        : null;
 
     // Determine accent classes based on type
     const accentClasses = {
@@ -101,6 +78,8 @@ export function ShopPriceComparisonTable({ type, title, accentColor }: ShopPrice
         hoverBg: accentColor === "purple" ? "hover:bg-purple-100" : "hover:bg-teal-100",
         headerBg: accentColor === "purple" ? "bg-purple-600" : "bg-teal-600",
     };
+
+    const shops = analytics?.shop_rankings || [];
 
     return (
         <div className="w-full bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
@@ -139,7 +118,7 @@ export function ShopPriceComparisonTable({ type, title, accentColor }: ShopPrice
                             <th className="px-4 py-4 text-left text-sm font-semibold text-slate-600 w-48">
                                 Boutiques
                             </th>
-                            {shops.map((shop, idx) => (
+                            {shops.length > 0 ? shops.map((shop, idx) => (
                                 <th key={idx} className="px-3 py-4 text-center min-w-[100px]">
                                     <div className="flex flex-col items-center gap-2">
                                         {SHOP_IMAGES[shop.shop.toLowerCase()] ? (
@@ -155,7 +134,12 @@ export function ShopPriceComparisonTable({ type, title, accentColor }: ShopPrice
                                         )}
                                     </div>
                                 </th>
-                            ))}
+                            )) : (
+                                // Placeholder headers if no data yet (should rarely happen with pre-fetching)
+                                <th className="px-3 py-4 text-center w-full text-slate-400 font-normal">
+                                    --
+                                </th>
+                            )}
                         </tr>
                     </thead>
 
@@ -169,26 +153,23 @@ export function ShopPriceComparisonTable({ type, title, accentColor }: ShopPrice
                             </td>
 
                             {/* Price cells */}
-                            {loading ? (
-                                shops.map((_, idx) => (
+                            {shops.map((shop, idx) => {
+                                const isCheapest = shop.shop === analytics?.cheapest_shop;
+                                return (
                                     <td key={idx} className="px-3 py-4 text-center">
-                                        <div className="h-5 w-16 mx-auto bg-slate-200 rounded animate-pulse"></div>
+                                        <span className={`font-bold text-sm ${isCheapest
+                                            ? `${accentClasses.text} bg-gradient-to-r ${accentColor === "purple" ? "from-purple-100 to-purple-50" : "from-teal-100 to-teal-50"} px-3 py-1.5 rounded-full shadow-sm`
+                                            : "text-slate-700"
+                                            }`}>
+                                            {shop.avg_price.toFixed(2)} DT
+                                        </span>
                                     </td>
-                                ))
-                            ) : (
-                                shops.map((shop, idx) => {
-                                    const isCheapest = shop.shop === analytics?.cheapest_shop;
-                                    return (
-                                        <td key={idx} className="px-3 py-4 text-center">
-                                            <span className={`font-bold text-sm ${isCheapest
-                                                    ? `${accentClasses.text} bg-gradient-to-r ${accentColor === "purple" ? "from-purple-100 to-purple-50" : "from-teal-100 to-teal-50"} px-3 py-1.5 rounded-full shadow-sm`
-                                                    : "text-slate-700"
-                                                }`}>
-                                                {shop.avg_price.toFixed(2)} DT
-                                            </span>
-                                        </td>
-                                    );
-                                })
+                                );
+                            })}
+                            {shops.length === 0 && (
+                                <td className="px-4 py-4 text-center text-slate-400">
+                                    Pas de données
+                                </td>
                             )}
                         </tr>
                     </tbody>

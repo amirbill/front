@@ -6,6 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { API_URL } from "@/lib/api"
 import Link from "next/link"
+import { fetchProductsAction } from "@/app/actions"
 
 interface ShopPrice {
     shop: string
@@ -41,6 +42,7 @@ interface ProductShowcaseProps {
     categoryType?: "subcategory" | "low_category"
     /** List of categories to show in tabs */
     categories: CategoryConfig[]
+    initialProducts?: Product[]
     /** Optional banner image */
     bannerImage?: string
     /** Optional banner text */
@@ -62,12 +64,14 @@ export default function ProductShowcase({
     categoryType = "subcategory",
     categories,
     bannerImage,
-    bannerText = "Jusqu'à -40%"
+    bannerText = "Jusqu'à -40%",
+    initialProducts
 }: ProductShowcaseProps) {
-    const [products, setProducts] = useState<Product[]>([])
-    const [loading, setLoading] = useState(true)
+    const [products, setProducts] = useState<Product[]>(initialProducts || [])
+    const [loading, setLoading] = useState(!initialProducts)
     const [activeCategory, setActiveCategory] = useState(defaultCategory)
     const [activeCategoryType, setActiveCategoryType] = useState<"subcategory" | "low_category">(categoryType)
+    const [isFirstLoad, setIsFirstLoad] = useState(!!initialProducts)
     const scrollContainerRef = useRef<HTMLDivElement>(null)
 
     // Get the appropriate banner image for the current category
@@ -77,18 +81,17 @@ export default function ProductShowcase({
     useEffect(() => {
         if (!activeCategory) return
 
+        // Skip fetch on first load if we have initial products
+        if (isFirstLoad && products.length > 0) {
+            setIsFirstLoad(false)
+            return
+        }
+
         const fetchProducts = async () => {
             setLoading(true)
             try {
-                const url = `${API_URL}/products/random?category=${encodeURIComponent(activeCategory)}&category_type=${activeCategoryType}&limit=10`;
-                console.log(`[ProductShowcase] Fetching: ${url}`);
-                const res = await fetch(url)
-                if (!res.ok) {
-                    const errorText = await res.text();
-                    console.error(`[ProductShowcase] Fetch failed (${res.status}):`, errorText);
-                    throw new Error(`Failed to fetch products: ${res.status}`);
-                }
-                const data = await res.json()
+                // Use Server Action instead of direct fetch
+                const data = await fetchProductsAction(activeCategory, activeCategoryType, 10)
                 setProducts(data)
             } catch (error) {
                 console.error("Error fetching products:", error)

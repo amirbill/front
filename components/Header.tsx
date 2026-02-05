@@ -20,12 +20,19 @@ interface Ripple {
     y: number;
 }
 
-export default function Header() {
+interface HeaderProps {
+    initialUser?: any;
+}
+
+export default function Header({ initialUser }: HeaderProps) {
     const [ripples, setRipples] = useState<Ripple[]>([]);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [imgError, setImgError] = useState(false);
-    const { user, logout } = useAuth(); // Keeping for mobile menu logic for now
+    const { user: contextUser, logout } = useAuth();
+
+    // Use server-provided user if available, otherwise fallback to context (client-side)
+    const user = initialUser || contextUser;
 
     const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -120,7 +127,7 @@ export default function Header() {
                         <span className="text-xs font-bold text-green-700">Économisez jusqu&apos;à 40%</span>
                     </div>
 
-                    <UserMenu />
+                    <UserMenu initialUser={user} />
                 </div>
 
                 {/* Mobile Menu Button */}

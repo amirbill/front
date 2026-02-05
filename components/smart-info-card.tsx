@@ -20,6 +20,8 @@ export function SmartInfoCard({
                     loop
                     muted
                     playsInline
+                    preload="auto"
+                    poster="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/d30527df-7416-4ead-affa-cf9a2d9e3729_800w.jpg"
                     className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-700 group-hover:opacity-80"
                 >
                     <source src={videoSrc} type="video/mp4" />

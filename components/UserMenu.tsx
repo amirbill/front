@@ -13,8 +13,13 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function UserMenu() {
-    const { user, logout } = useAuth()
+interface UserMenuProps {
+    initialUser?: any;
+}
+
+export function UserMenu({ initialUser }: UserMenuProps) {
+    const { user: contextUser, logout } = useAuth()
+    const user = initialUser || contextUser;
     const [imgError, setImgError] = useState(false)
 
     if (!user) {
