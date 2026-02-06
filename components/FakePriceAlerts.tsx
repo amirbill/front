@@ -118,7 +118,7 @@ export function FakePriceAlerts() {
                     <AlertTriangle className="size-7" />
                 </div>
                 <div>
-                    <h2 className="text-2xl font-black text-foreground">
+                    <h2 className="text-2xl font-black text-[#2563EB]">
                         Attention aux Prix Mensongers!
                     </h2>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -145,7 +145,7 @@ export function FakePriceAlerts() {
             {/* Products Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {fakeDiscountProducts.map((product) => (
-                    <div 
+                    <div
                         key={product.id}
                         className="bg-card rounded-2xl border-2 border-red-200 p-3 shadow-sm hover:shadow-lg transition-all hover:border-red-400"
                     >

@@ -56,7 +56,7 @@ export function GroceryPriceSection() {
             <div className="max-w-7xl mx-auto">
                 {/* Section Title */}
                 <h2 className="text-3xl md:text-5xl font-black mb-12 text-[#8B5CF6] tracking-tight">
-                    9offet Ettounsi: <span className="text-[#111827]">3eja</span>
+                    9offet Ettounsi: <span className="text-[#2563EB]">3eja</span>
                 </h2>
 
                 {/* Products Grid */}

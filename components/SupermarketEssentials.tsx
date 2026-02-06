@@ -159,7 +159,7 @@ export function SupermarketEssentials() {
                         <ChefHat className="size-7" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-black text-foreground">
+                        <h2 className="text-2xl font-black text-[#2563EB]">
                             🍳 9offet Ettounsi
                         </h2>
                         <p className="text-sm text-muted-foreground mt-1">

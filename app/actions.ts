@@ -38,12 +38,13 @@ export async function fetchAnalyticsAction(type: "products" | "para", category: 
     }
 }
 
-export async function searchProductsAction(query: string, limit: number = 5) {
+export async function searchProductsAction(query: string, limit: number = 5, shop?: string) {
     try {
+        const shopParam = shop ? `&shop=${encodeURIComponent(shop)}` : '';
         // Search both endpoints in parallel
         const [retailRes, paraRes] = await Promise.all([
-            fetch(`${API_URL}/products/search?q=${encodeURIComponent(query)}&limit=${limit}`, { cache: 'no-store' }),
-            fetch(`${API_URL}/para/search?q=${encodeURIComponent(query)}&limit=${limit}`, { cache: 'no-store' })
+            fetch(`${API_URL}/products/search?q=${encodeURIComponent(query)}&limit=${limit}${shopParam}`, { cache: 'no-store' }),
+            fetch(`${API_URL}/para/search?q=${encodeURIComponent(query)}&limit=${limit}${shopParam}`, { cache: 'no-store' })
         ]);
 
         const retailData = retailRes.ok ? await retailRes.json() : [];
@@ -91,3 +92,25 @@ export async function getCategoriesAction(type: "products" | "para", endpoint: "
         return [];
     }
 }
+
+export async function calculateBestShopAction(items: { sku: string; source: string }[]) {
+    try {
+        const res = await fetch(`${API_URL}/bag/best-shop`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items }),
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            console.error("[Server Action] Failed to calculate best shop:", res.status);
+            return null;
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error("[Server Action] Error calculating best shop:", error);
+        return null;
+    }
+}
+

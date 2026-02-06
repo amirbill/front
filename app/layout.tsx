@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { BagProvider } from "@/contexts/BagContext";
 import { GoogleProvider } from "@/components/providers/GoogleProvider";
 
 const geistSans = Geist({
@@ -21,14 +22,12 @@ export const metadata: Metadata = {
 
 import { getUserFromServer } from "@/lib/auth-server";
 
-// ... existing imports
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getUserFromServer(); // Server-side fetch
+  const user = await getUserFromServer();
 
   return (
     <html lang="en">
@@ -37,10 +36,13 @@ export default async function RootLayout({
       >
         <GoogleProvider>
           <AuthProvider initialUser={user}>
-            {children}
+            <BagProvider>
+              {children}
+            </BagProvider>
           </AuthProvider>
         </GoogleProvider>
       </body>
     </html>
   );
 }
+

@@ -10,6 +10,7 @@ import { ParaProductShowcase } from '@/components/ParaProductShowcase';
 import { FakePriceAlerts } from '@/components/FakePriceAlerts';
 import { PriceIncreasePrediction } from '@/components/PriceIncreasePrediction';
 import { ShopPriceComparisonTable } from '@/components/ShopPriceComparisonTable';
+import { BestShopSection } from '@/components/BestShopSection';
 import { API_URL } from '@/lib/api';
 
 // Category configurations for each showcase
@@ -170,6 +171,12 @@ export default async function Home() {
 
         <div className="max-w-7xl mx-auto w-full px-4">
           <HeroSection />
+
+          {/* Best Shop Section */}
+          <div className="my-12">
+            <BestShopSection />
+          </div>
+
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             <SmartInfoCard
               videoSrc="/videos/vid1 .mp4"
@@ -204,6 +211,14 @@ export default async function Home() {
             />
           </div>
 
+
+
+          <div className="mt-25">
+            {/* Supermarket Essentials Section */}
+            <SupermarketEssentials />
+          </div>
+
+
           <ProductShowcase
             defaultCategory="Imprimante"
             categoryType="low_category"
@@ -237,13 +252,12 @@ export default async function Home() {
             initialProducts={laveVaisselleProducts}
           />
 
-          {/* Supermarket Essentials Section */}
-          <SupermarketEssentials />
+
 
           {/* Parapharmacie Section */}
           <div className="max-w-7xl mx-auto w-full px-4 pt-12">
             <h2 className="text-3xl md:text-5xl font-black text-[#0D9488] tracking-tight">
-              Parapharmacie: <span className="text-[#111827]">Comparez les Prix</span>
+              Parapharmacie: <span className="text-[#2563EB]">Comparez les Prix</span>
             </h2>
             <p className="text-gray-500 mt-2">
               Trouvez les meilleurs prix parmi Parashop, Pharma Shop et Parafendri

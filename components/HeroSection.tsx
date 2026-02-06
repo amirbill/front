@@ -29,10 +29,10 @@ const HeroSection = () => {
                             </span>
                         </h2>
                         <h2 className="flex flex-col leading-[0.9] tracking-tighter mt-1">
-                            <span className="text-5xl md:text-7xl font-black text-[#FFBD12] italic uppercase">
+                            <span className="text-5xl md:text-7xl font-black text-[#2563EB] italic uppercase">
                                 PAYEZ MOINS,
                             </span>
-                            <span className="text-5xl md:text-7xl font-black text-[#FFBD12] italic uppercase">
+                            <span className="text-5xl md:text-7xl font-black text-[#2563EB] italic uppercase">
                                 SOURIEZ PLUS
                             </span>
                         </h2>

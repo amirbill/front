@@ -192,8 +192,8 @@ export default function PriceCards({ initialData }: PriceCardsProps) {
                     <div className="max-w-7xl mx-auto px-4 mb-10">
                         <div className="flex items-center gap-4">
                             <div className="h-10 w-2 bg-[#8B5CF6] rounded-full"></div>
-                            <h2 className="text-[#1F2937] font-black text-3xl sm:text-4xl text-left tracking-tight">
-                                La myenne des Prix par site <span className="text-[#8B5CF6]">E-commerce</span><span className="text-[#8B5CF6]">مُعَدَّلَات الأسعار</span>
+                            <h2 className="text-[#2563EB] font-black text-3xl sm:text-4xl text-left tracking-tight">
+                                La myenne des Prix par site <span className="text-[#8B5CF6]">E-commerce</span><span className="text-[#8B5CF6]">مُعَدَّلَ الأسعار</span>
                             </h2>
                         </div>
                     </div>
@@ -214,8 +214,8 @@ export default function PriceCards({ initialData }: PriceCardsProps) {
                     <div className="max-w-7xl mx-auto px-4 mb-10">
                         <div className="flex items-center gap-4">
                             <div className="h-10 w-2 bg-[#10B981] rounded-full"></div>
-                            <h2 className="text-[#1F2937] font-black text-3xl sm:text-4xl text-left tracking-tight">
-                                La moyenne des Prix par site <span className="text-[#10B981]">Parapharmacie</span><span className="text-[#8B5CF6]">مُعَدَّلَات الأسعار</span>
+                            <h2 className="text-[#2563EB] font-black text-3xl sm:text-4xl text-left tracking-tight">
+                                La moyenne des Prix par site <span className="text-[#10B981]">Parapharmacie</span><span className="text-[#8B5CF6]">مُعَدَّلَ الأسعار</span>
                             </h2>
                         </div>
                     </div>
