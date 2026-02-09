@@ -59,7 +59,7 @@ export const AuthProvider = ({ children, initialUser }: { children: React.ReactN
     const signup = async (data: any) => {
         const response = await signupAction(data);
         if (response.success) {
-            router.push(`/verify?email=${data.email}`);
+            router.push('/signin');
         } else {
             throw new Error(response.error || 'Signup failed');
         }

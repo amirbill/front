@@ -29,7 +29,7 @@ const plans = [
     {
         name: "Pro",
         description: "Pour les acheteurs réguliers et les petites entreprises",
-        price: "19",
+        price: "99",
         period: "/mois",
         icon: Rocket,
         color: "purple",
@@ -51,7 +51,7 @@ const plans = [
     {
         name: "Business",
         description: "Pour les entreprises et les revendeurs",
-        price: "49",
+        price: "199",
         period: "/mois",
         icon: Building2,
         color: "teal",
@@ -66,6 +66,7 @@ const plans = [
             { name: "API Access illimité", included: true },
             { name: "Rapports personnalisés", included: true },
             { name: "Export tous formats", included: true },
+            { name: "Nombre des sites : 5", included: true },
         ],
         cta: "Contacter les ventes",
         ctaLink: "/contact?plan=business",
@@ -88,6 +89,8 @@ const plans = [
             { name: "Données en temps réel", included: true },
             { name: "Analyse prédictive IA", included: true },
             { name: "White-label disponible", included: true },
+            { name: "Nombre des sites : illimité ", included: true },
+            { name: "Surveillance du Marché", included: true }
         ],
         cta: "Demander un devis",
         ctaLink: "/contact?plan=enterprise",
@@ -158,7 +161,7 @@ export default function PricingPage() {
                         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
                         <div className="absolute bottom-20 right-10 w-72 h-72 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
                     </div>
-                    
+
                     <div className="relative max-w-7xl mx-auto px-4 text-center">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm mb-6">
                             <Zap className="size-4 text-amber-400" />
@@ -168,7 +171,7 @@ export default function PricingPage() {
                             Choisissez votre plan
                         </h1>
                         <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                            Des solutions adaptées aux particuliers comme aux entreprises. 
+                            Des solutions adaptées aux particuliers comme aux entreprises.
                             Commencez gratuitement et évoluez selon vos besoins.
                         </p>
                     </div>
@@ -187,9 +190,9 @@ export default function PricingPage() {
                                     amber: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-600", button: "bg-amber-600 hover:bg-amber-700" },
                                 };
                                 const colors = colorClasses[plan.color];
-                                
+
                                 return (
-                                    <div 
+                                    <div
                                         key={plan.name}
                                         className={`relative rounded-3xl bg-white border-2 ${plan.popular ? 'border-purple-400 shadow-xl shadow-purple-100' : 'border-slate-200'} p-6 flex flex-col`}
                                     >
@@ -198,14 +201,14 @@ export default function PricingPage() {
                                                 Plus populaire
                                             </div>
                                         )}
-                                        
+
                                         {/* Header */}
                                         <div className={`w-12 h-12 rounded-2xl ${colors.bg} flex items-center justify-center mb-4`}>
                                             <IconComponent className={`size-6 ${colors.text}`} />
                                         </div>
                                         <h3 className="text-xl font-bold text-slate-900">{plan.name}</h3>
                                         <p className="text-sm text-slate-500 mt-1">{plan.description}</p>
-                                        
+
                                         {/* Price */}
                                         <div className="mt-6 mb-6">
                                             <span className="text-4xl font-black text-slate-900">
@@ -217,7 +220,7 @@ export default function PricingPage() {
                                                 <span className="text-slate-500">{plan.period}</span>
                                             )}
                                         </div>
-                                        
+
                                         {/* Features */}
                                         <ul className="space-y-3 flex-grow">
                                             {plan.features.map((feature, idx) => (
@@ -233,9 +236,9 @@ export default function PricingPage() {
                                                 </li>
                                             ))}
                                         </ul>
-                                        
+
                                         {/* CTA */}
-                                        <Link 
+                                        <Link
                                             href={plan.ctaLink}
                                             className={`mt-6 w-full py-3 px-4 rounded-xl text-white font-semibold text-center transition-colors ${colors.button}`}
                                         >
@@ -259,7 +262,7 @@ export default function PricingPage() {
                                 Des fonctionnalités puissantes pour optimiser vos achats et économiser du temps et de l&apos;argent.
                             </p>
                         </div>
-                        
+
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {features.map((feature, idx) => {
                                 const IconComponent = feature.icon;
@@ -288,7 +291,7 @@ export default function PricingPage() {
                                 Vous avez des questions ? Nous avons les réponses.
                             </p>
                         </div>
-                        
+
                         <div className="space-y-4">
                             {faqs.map((faq, idx) => (
                                 <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
@@ -310,14 +313,14 @@ export default function PricingPage() {
                             Rejoignez des milliers de Tunisiens qui économisent chaque jour grâce à 111.tn
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link 
+                            <Link
                                 href="/"
                                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 font-bold rounded-full hover:bg-red-50 transition-colors"
                             >
                                 Commencer maintenant
                                 <ArrowRight className="size-5" />
                             </Link>
-                            <Link 
+                            <Link
                                 href="/contact"
                                 className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white font-bold rounded-full border-2 border-white/50 hover:bg-white/10 transition-colors"
                             >
