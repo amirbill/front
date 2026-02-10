@@ -12,6 +12,8 @@ import { FakePriceAlerts } from '@/components/FakePriceAlerts';
 import { PriceIncreasePrediction } from '@/components/PriceIncreasePrediction';
 import { ShopPriceComparisonTable } from '@/components/ShopPriceComparisonTable';
 import { BestShopSection } from '@/components/BestShopSection';
+import { PriceVariationAlert } from '@/components/PriceVariationAlert';
+import { CouffinTounsiSection } from '@/components/CouffinTounsiSection';
 import { API_URL } from '@/lib/api';
 
 // Category configurations for each showcase
@@ -190,6 +192,8 @@ export default async function Home() {
     getComparisonProducts(9)
   ]);
 
+  const predictiveProduct = imprimanteProducts?.[0];
+
   return (
     <div className="flex flex-col min-h-screen bg-white font-[family-name:var(--font-geist-sans)]">
       <Header />
@@ -214,6 +218,8 @@ export default async function Home() {
           </div>
 
           <PriceCards initialData={pricesData} />
+
+          <CouffinTounsiSection />
 
           {/* Best Shop Section */}
           <div className="my-12">
@@ -328,14 +334,17 @@ export default async function Home() {
             initialProducts={visageProducts}
           />
 
-          <SupermarketComparison products={comparisonProducts} />
+        </div> {/* End of max-w-7xl from line 204 */}
 
-          <div className="max-w-7xl mx-auto w-full px-4">
-            <FakePriceAlerts />
-            <PriceIncreasePrediction />
-          </div>
+        <SupermarketComparison products={comparisonProducts} />
 
+        <div className="max-w-7xl mx-auto w-full px-4">
+          <FakePriceAlerts />
+          <PriceVariationAlert product={predictiveProduct} />
+          {/*<PriceIncreasePrediction />*/}
         </div>
+
+
 
       </main>
       <Footer />

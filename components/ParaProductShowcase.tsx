@@ -55,12 +55,12 @@ interface ParaProductShowcaseProps {
 
 // Category-specific banner images for PARA products
 const paraBannerImages: Record<string, string> = {
-    "Maman et bébé": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=600&fit=crop",
-    "Solaire": "https://images.unsplash.com/photo-1526758097130-bab247274f58?w=400&h=600&fit=crop",
-    "Hygiène": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=600&fit=crop",
-    "Visage": "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=600&fit=crop",
-    "Cheveux": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=600&fit=crop",
-    "Corps": "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=400&h=600&fit=crop",
+    "Maman et bébé": "/objects-showing-its-girl-expectancy.jpg",
+    "Solaire": "/sunscreen-tube-with-spf-50-rock-by-sea.jpg",
+    "Hygiène": "/still-life-dispenser-bottle.jpg",
+    "Visage": "/portrait-woman-wearing-beauty-mask.jpg",
+    "Cheveux": "/still-life-dispenser-bottle.jpg",
+    "Corps": "/still-life-dispenser-bottle.jpg",
 }
 
 export function ParaProductShowcase({

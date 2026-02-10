@@ -56,9 +56,9 @@ const HeroSection = () => {
                     {/* Top Right Circle Blob */}
                     <div className="absolute -top-8 -right-8 size-48 md:size-64 rounded-full bg-[#A855F7] overflow-hidden border-[5px] border-white shadow-[0_15px_45px_rgba(0,0,0,0.12)] z-10 hover:scale-105 transition-transform duration-500">
                         <img
-                            src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2670&auto=format&fit=crop"
-                            alt="Abstraction 1"
-                            className="w-full h-full object-cover opacity-90"
+                            src="/images/2_.png"
+                            alt="Visual 2"
+                            className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/20 to-transparent" />
                     </div>
@@ -66,9 +66,9 @@ const HeroSection = () => {
                     {/* Central Large Oval Blob */}
                     <div className="absolute top-1/2 left-0 -translate-y-1/2 w-48 md:w-60 h-[340px] md:h-[420px] rounded-[10rem] bg-[#FFD700] overflow-hidden border-[6px] border-white shadow-[0_20px_50px_rgba(255,189,18,0.25)] z-20 hover:scale-[1.02] transition-transform duration-500">
                         <img
-                            src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1681&auto=format&fit=crop"
-                            alt="Product 1"
-                            className="w-full h-full object-cover mix-blend-multiply opacity-80"
+                            src="/images/1_.png"
+                            alt="Visual 1"
+                            className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFBD12]/40 to-transparent" />
                     </div>
@@ -76,8 +76,8 @@ const HeroSection = () => {
                     {/* Bottom Right Arch Blob */}
                     <div className="absolute -bottom-10 -right-6 w-40 md:size-68 rounded-t-[8rem] rounded-b-[1.5rem] bg-[#F97316] overflow-hidden border-[5px] border-white shadow-[0_15px_40px_rgba(0,0,0,0.12)] z-10 hover:scale-105 transition-transform duration-500">
                         <img
-                            src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1587&auto=format&fit=crop"
-                            alt="Lifestyle 1"
+                            src="/images/3_.png"
+                            alt="Visual 3"
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-orange/40 to-transparent" />

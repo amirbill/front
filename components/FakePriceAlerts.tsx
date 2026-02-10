@@ -115,12 +115,12 @@ export function FakePriceAlerts() {
             {/* Section Header */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
                 <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center size-14 rounded-2xl bg-gradient-to-br from-red-400 to-orange-600 text-white shadow-lg">
+                    <div className="flex items-center justify-center size-14 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-600 text-white shadow-lg">
                         <AlertTriangle className="size-7" />
                     </div>
                     <div>
                         <h2 className="text-2xl md:text-4xl font-black text-[#2563EB] tracking-tight">
-                            Attention aux Prix Mensongers!
+                            Attention aux Faux Prix!
                         </h2>
                         <p className="text-sm text-muted-foreground mt-1">
                             Nous détectons les fausses promotions avec des prix d&apos;origine gonflés artificiellement
@@ -137,15 +137,15 @@ export function FakePriceAlerts() {
             </div>
 
             {/* Alert Banner */}
-            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-2xl p-4 mb-6 flex items-center gap-4">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-4 mb-6 flex items-center gap-4">
                 <div className="flex-shrink-0">
-                    <Eye className="size-6 text-red-500" />
+                    <Eye className="size-6 text-blue-500" />
                 </div>
                 <div>
-                    <p className="text-sm font-semibold text-red-800">
+                    <p className="text-sm font-semibold text-blue-800">
                         Notre algorithme analyse l&apos;historique des prix pour détecter les promotions trompeuses
                     </p>
-                    <p className="text-xs text-red-600 mt-1">
+                    <p className="text-xs text-blue-600 mt-1">
                         {fakeDiscountProducts.length} produits suspects détectés cette semaine
                     </p>
                 </div>
@@ -156,7 +156,7 @@ export function FakePriceAlerts() {
                 {fakeDiscountProducts.map((product) => (
                     <div
                         key={product.id}
-                        className="bg-card rounded-2xl border-2 border-red-200 p-3 shadow-sm hover:shadow-lg transition-all hover:border-red-400"
+                        className="bg-card rounded-2xl border-2 border-blue-200 p-3 shadow-sm hover:shadow-lg transition-all hover:border-blue-400"
                     >
                         {/* Product Image with Warning Badge */}
                         <div className="relative h-24 w-full mb-3 rounded-xl overflow-hidden bg-muted/30">
@@ -166,9 +166,9 @@ export function FakePriceAlerts() {
                                 fill
                                 className="object-cover"
                             />
-                            <div className="absolute top-0 left-0 right-0 bg-red-500 text-white text-[9px] font-bold py-1 text-center flex items-center justify-center gap-1">
+                            <div className="absolute top-0 left-0 right-0 bg-blue-500 text-white text-[9px] font-bold py-1 text-center flex items-center justify-center gap-1">
                                 <AlertTriangle className="size-3" />
-                                PRIX MENSONGER
+                                FAUX PRIX
                             </div>
                             <div className={`absolute bottom-2 left-2 ${shopColors[product.shop] || "bg-gray-500"} text-white text-[8px] font-bold px-2 py-0.5 rounded-full`}>
                                 {product.shop}
@@ -186,24 +186,24 @@ export function FakePriceAlerts() {
                         </div>
 
                         {/* Price Analysis */}
-                        <div className="space-y-2 p-2 bg-red-50 rounded-lg">
+                        <div className="space-y-2 p-2 bg-blue-50 rounded-lg">
                             {/* Claimed Discount */}
                             <div className="flex items-center justify-between">
-                                <span className="text-[9px] text-red-600 font-medium">
+                                <span className="text-[9px] text-blue-600 font-medium">
                                     Réduction affichée:
                                 </span>
                                 <div className="flex items-center gap-1">
-                                    <span className="text-[10px] line-through text-red-400">
+                                    <span className="text-[10px] line-through text-blue-400">
                                         {formatPrice(product.claimedOriginalPrice)}
                                     </span>
-                                    <span className="bg-red-500 text-white text-[8px] font-bold px-1 rounded">
+                                    <span className="bg-blue-500 text-white text-[8px] font-bold px-1 rounded">
                                         -{product.discountClaimed}%
                                     </span>
                                 </div>
                             </div>
 
                             {/* Real Price History */}
-                            <div className="flex items-center justify-between border-t border-red-200 pt-2">
+                            <div className="flex items-center justify-between border-t border-blue-200 pt-2">
                                 <span className="text-[9px] text-green-700 font-medium">
                                     Vrai prix d&apos;origine:
                                 </span>
