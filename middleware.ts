@@ -33,9 +33,10 @@ export async function middleware(request: NextRequest) {
     }
 
     // ============================================================
-    // 3. PUBLIC USERS — can ONLY access /signup, nothing else
+    // 3. PUBLIC USERS — can ONLY access /signup and /signin
     // ============================================================
-    if (pathname === '/signup' || pathname.startsWith('/signup/')) {
+    if (pathname === '/signup' || pathname.startsWith('/signup/') ||
+        pathname === '/signin' || pathname.startsWith('/signin/')) {
         return NextResponse.next()
     }
 
