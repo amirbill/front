@@ -60,7 +60,7 @@ export function SupermarketComparison({ products: initialProducts }: Supermarket
                                         const config = SHOP_CONFIG[sp.shop.toLowerCase()];
                                         return (
                                             <div key={idx} className="flex flex-col items-center gap-1.5 flex-1 min-w-0">
-                                                <div className="h-8 w-8 relative flex items-center justify-center bg-white rounded-lg p-1 border border-slate-100 shadow-sm">
+                                                <div className="h-16 w-16 relative flex items-center justify-center bg-white rounded-lg p-1 border border-slate-100 shadow-sm">
                                                     {config?.image ? (
                                                         <img src={config.image} alt={sp.shop} className="max-h-full max-w-full object-contain" />
                                                     ) : (
