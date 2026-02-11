@@ -4,7 +4,7 @@ import { jwtVerify } from 'jose'
 
 // ---- COMING SOON MODE ----
 // Set to false when the site is ready to launch
-const COMING_SOON = true
+const COMING_SOON = false
 const PREVIEW_SECRET = 'preview1111tn'
 
 export async function middleware(request: NextRequest) {

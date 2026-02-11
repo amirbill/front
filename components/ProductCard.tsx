@@ -3,8 +3,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Check, X } from "lucide-react"
-import { useAuth } from "../contexts/AuthContext"
-import { useRouter } from "next/navigation"
 
 interface ShopPrice {
     shop: string
@@ -52,28 +50,17 @@ export function ProductCard({
     shopPrices = [],
     linkPrefix = "/products",
 }: ProductCardProps) {
-    const { user } = useAuth();
-    const router = useRouter();
-
     const formatPrice = (value: number) => {
         return value.toFixed(3) + " DT"
     }
 
     const productLink = `${linkPrefix}/${id}`
 
-    const handleProtectedClick = (e: React.MouseEvent) => {
-        if (!user) {
-            e.preventDefault();
-            router.push('/signup');
-        }
-    }
-
     return (
         <div className="flex w-[220px] shrink-0 flex-col rounded-2xl border border-border bg-card p-3 shadow-sm transition-all hover:shadow-lg">
             {/* Image Container */}
             <Link
                 href={productLink}
-                onClick={handleProtectedClick}
                 className="relative mb-3 h-32 w-full overflow-hidden rounded-xl bg-muted/30 block"
             >
                 <Image
@@ -102,7 +89,6 @@ export function ProductCard({
                 {/* Product Name */}
                 <Link
                     href={productLink}
-                    onClick={handleProtectedClick}
                     className="text-xs font-semibold leading-tight text-card-foreground hover:text-purple transition-colors line-clamp-2 min-h-[32px]"
                 >
                     {name}
@@ -161,7 +147,6 @@ export function ProductCard({
                 {/* Action Button */}
                 <Link
                     href={productLink}
-                    onClick={handleProtectedClick}
                     className="mt-auto flex items-center justify-center gap-1.5 rounded-full bg-purple py-2 text-[11px] font-bold text-purple-foreground transition-colors hover:bg-purple/90"
                 >
                     Voir les offres
