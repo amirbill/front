@@ -2,13 +2,15 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Eye, BarChart3, Settings } from "lucide-react"
+import { Home, Eye, BarChart3, Settings, Store, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Veille Produits & marques", href: "/dashboard/veille", icon: Eye },
     { name: "Benchmarking avancé", href: "/dashboard/benchmarking", icon: BarChart3 },
+    { name: "Data Market", href: "/dashboard/data-market", icon: Store },
+    { name: "Accessibility Control", href: "/dashboard/accessibility-control", icon: Shield },
     { name: "Paramètres", href: "/dashboard/parametre", icon: Settings },
 ]
 
