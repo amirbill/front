@@ -6,6 +6,7 @@
   NEXT_PUBLIC_API_URL = "https://back-27em.onrender.com/api/v1/"
   NEXT_PUBLIC_GOOGLE_CLIENT_ID = "166147533764-que54mo53gh1u5vgdfshloem97oluhnf.apps.googleusercontent.com"
   NEXT_PUBLIC_SITE_URL = "https://1111.tn"
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_API_URL,NEXT_PUBLIC_GOOGLE_CLIENT_ID"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
