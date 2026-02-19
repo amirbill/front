@@ -1,0 +1,23 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_PUBLIC_API_URL = "https://back-27em.onrender.com/api/v1/"
+  NEXT_PUBLIC_GOOGLE_CLIENT_ID = "166147533764-que54mo53gh1u5vgdfshloem97oluhnf.apps.googleusercontent.com"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/api/v1/*"
+  to = "https://back-27em.onrender.com/api/v1/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

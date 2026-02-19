@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "build": "next build --no-turbo",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@netlify/plugin-nextjs": "^5.15.8",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-switch": "^1.2.6",
