@@ -84,20 +84,21 @@ export default function SignInPage() {
 
     return (
         <div className="relative flex min-h-screen overflow-hidden">
-            {/* Video background - smaller on mobile */}
-            <div className="absolute inset-0 md:inset-0">
+            {/* Video background - high quality */}
+            <div className="absolute inset-0">
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
-                    className="absolute top-0 left-0 w-full h-[40vh] md:h-full md:w-full object-cover object-center"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                 >
                     <source src="/videos/1111_vid.mp4" type="video/mp4" />
                 </video>
-                {/* Light overlay for better readability */}
-                <div className="absolute inset-0 bg-white/30 md:bg-white/20" />
+                {/* Very light overlay to maintain text readability */}
+                <div className="absolute inset-0 bg-white/10" />
             </div>
 
             {/* Left Side - Branding + Countdown */}
