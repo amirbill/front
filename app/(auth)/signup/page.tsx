@@ -26,6 +26,7 @@ type SignUpFormValues = z.infer<typeof signUpSchema>
 
 // Countdown target: 30 days from first visit
 function useCountdown() {
+    const [mounted, setMounted] = useState(false)
     const [target] = useState(() => {
         if (typeof window !== "undefined") {
             const stored = localStorage.getItem("launch_date_1111")
@@ -40,6 +41,7 @@ function useCountdown() {
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
 
     useEffect(() => {
+        setMounted(true)
         const tick = () => {
             const diff = Math.max(0, target - Date.now())
             setTimeLeft({
@@ -54,7 +56,7 @@ function useCountdown() {
         return () => clearInterval(id)
     }, [target])
 
-    return timeLeft
+    return { timeLeft, mounted }
 }
 
 export default function SignUpPage() {
@@ -64,7 +66,7 @@ export default function SignUpPage() {
     const [success, setSuccess] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { signup } = useAuth()
-    const countdown = useCountdown()
+    const { timeLeft: countdown, mounted } = useCountdown()
 
     const {
         register,
@@ -101,12 +103,20 @@ export default function SignUpPage() {
 
     return (
         <div className="relative flex min-h-screen overflow-hidden">
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-sky-50 to-cyan-100 animate-gradient-shift" />
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-blue-200/40 rounded-full blur-3xl animate-float-slow" />
-                <div className="absolute top-1/2 -right-32 w-[400px] h-[400px] bg-cyan-200/30 rounded-full blur-3xl animate-float-slower" />
-                <div className="absolute -bottom-20 left-1/3 w-[350px] h-[350px] bg-sky-200/30 rounded-full blur-3xl animate-float-medium" />
+            {/* Video background - smaller on mobile */}
+            <div className="absolute inset-0 md:inset-0">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="absolute top-0 left-0 w-full h-[40vh] md:h-full md:w-full object-cover object-center"
+                >
+                    <source src="/videos/1111_vid.mp4" type="video/mp4" />
+                </video>
+                {/* Light overlay for better readability */}
+                <div className="absolute inset-0 bg-white/30 md:bg-white/20" />
             </div>
 
             {/* Left Side - Branding + Countdown */}
@@ -151,7 +161,7 @@ export default function SignUpPage() {
                         </div>
 
                         <div className="flex items-center gap-3">
-                            {[
+                            {mounted && [
                                 { value: countdown.days, label: "Jours" },
                                 { value: countdown.hours, label: "Heures" },
                                 { value: countdown.minutes, label: "Min" },
@@ -194,7 +204,7 @@ export default function SignUpPage() {
                             </span>
                         </div>
                         <div className="flex items-center justify-center gap-2">
-                            {[
+                            {mounted && [
                                 { value: countdown.days, label: "J" },
                                 { value: countdown.hours, label: "H" },
                                 { value: countdown.minutes, label: "M" },
@@ -209,6 +219,19 @@ export default function SignUpPage() {
                                     </div>
                                 </React.Fragment>
                             ))}
+                        </div>
+                    </div>
+
+                    {/* Mascot */}
+                    <div className="flex justify-center mb-6 animate-bounce-gentle">
+                        <div className="relative w-40 h-48">
+                            <Image
+                                src="/images/1111hand.png"
+                                alt="Mascotte 1111"
+                                fill
+                                className="object-contain drop-shadow-lg"
+                                priority
+                            />
                         </div>
                     </div>
 
@@ -239,7 +262,7 @@ export default function SignUpPage() {
                             </div>
                         )}
 
-                        {success && (
+                        {success && mounted && (
                             <div className="mb-4 rounded-xl bg-green-50 border border-green-200 p-3 text-sm text-green-600 font-medium">
                                 ✅ Inscription réussie ! Votre compte a été créé. Le site ouvrira dans {countdown.days} jours. Vous recevrez un email de confirmation.
                             </div>
