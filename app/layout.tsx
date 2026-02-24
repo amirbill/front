@@ -102,7 +102,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fr" dir="ltr" suppressHydrationWarning>
-      <head>
+      <head suppressHydrationWarning>
         <link rel="canonical" href={BASE_URL} />
         <script
           suppressHydrationWarning
