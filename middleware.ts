@@ -3,8 +3,6 @@ import type { NextRequest } from 'next/server'
 
 // ---- ACCESS CONTROL ----
 // Tech team secret: append ?access=<SECRET> to any URL to unlock the full site
-const TECH_ACCESS_SECRET = 'tech1111tn'
-
 // Search engine bot detection
 const BOT_USER_AGENTS = [
     'googlebot', 'bingbot', 'slurp', 'duckduckbot', 'baiduspider',
@@ -32,41 +30,20 @@ export async function middleware(request: NextRequest) {
     }
 
     // ============================================================
-    // 1. TECH ACCESS: ?access=<secret> sets a cookie → full site access
+    // SITE CLOSED — redirect all traffic to signup page
     // ============================================================
-    if (searchParams.get('access') === TECH_ACCESS_SECRET) {
-        const cleanUrl = new URL(pathname, request.url)
-        const res = NextResponse.redirect(cleanUrl)
-        res.cookies.set('tech_access', '1', {
-            httpOnly: true,
-            maxAge: 60 * 60 * 24 * 30, // 30 days
-            path: '/',
-            sameSite: 'lax',
-        })
-        return res
+    // Allow access only to auth pages while site is closed
+    const allowedPaths = ['/signup', '/signin', '/verify', '/forgot-password', '/reset-password']
+    const isAllowedPath = allowedPaths.some(path => pathname.startsWith(path))
+    
+    if (!isAllowedPath) {
+        const url = request.nextUrl.clone()
+        url.pathname = '/signup'
+        return NextResponse.redirect(url)
     }
 
-    const hasTechAccess = request.cookies.get('tech_access')?.value === '1'
-
-    // ============================================================
-    // 2. TECH GUYS — full access to everything, no auth needed
-    // ============================================================
-    if (hasTechAccess) {
-        return NextResponse.next()
-    }
-
-    // ============================================================
-    // 3. PUBLIC USERS — can ONLY access /signup and /signin
-    // ============================================================
-    if (pathname === '/signup' || pathname.startsWith('/signup/') ||
-        pathname === '/signin' || pathname.startsWith('/signin/')) {
-        return NextResponse.next()
-    }
-
-    // Everything else → redirect to /signup
-    return NextResponse.redirect(new URL('/signup', request.url))
+    return NextResponse.next()
 }
-
 export const config = {
     matcher: [
         '/((?!api|_next/static|_next/image|favicon.ico|images|videos|sitemap.xml|robots.txt).*)',

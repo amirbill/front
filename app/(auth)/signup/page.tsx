@@ -28,10 +28,10 @@ type SignUpFormValues = z.infer<typeof signUpSchema>
 function useCountdown() {
     const [target] = useState(() => {
         if (typeof window !== "undefined") {
-            const stored = localStorage.getItem("countdown_target_1111")
+            const stored = localStorage.getItem("launch_date_1111")
             if (stored) return parseInt(stored, 10)
             const t = Date.now() + 30 * 24 * 60 * 60 * 1000
-            localStorage.setItem("countdown_target_1111", t.toString())
+            localStorage.setItem("launch_date_1111", t.toString())
             return t
         }
         return Date.now() + 30 * 24 * 60 * 60 * 1000
@@ -61,6 +61,7 @@ export default function SignUpPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [success, setSuccess] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { signup } = useAuth()
     const countdown = useCountdown()
@@ -69,12 +70,14 @@ export default function SignUpPage() {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm<SignUpFormValues>({
         resolver: zodResolver(signUpSchema),
     })
 
     const onSubmit = async (data: SignUpFormValues) => {
         setError(null)
+        setSuccess(false)
         setIsLoading(true)
         try {
             await signup({
@@ -82,6 +85,8 @@ export default function SignUpPage() {
                 password: data.password,
                 role: "client",
             })
+            setSuccess(true)
+            reset()
         } catch (err: any) {
             console.error("Signup Error:", err);
             if (err.response) {
@@ -231,6 +236,12 @@ export default function SignUpPage() {
                         {error && (
                             <div className="mb-4 rounded-xl bg-red-50 border border-red-200 p-3 text-sm text-red-600 font-medium animate-shake">
                                 {error}
+                            </div>
+                        )}
+
+                        {success && (
+                            <div className="mb-4 rounded-xl bg-green-50 border border-green-200 p-3 text-sm text-green-600 font-medium">
+                                ✅ Inscription réussie ! Votre compte a été créé. Le site ouvrira dans {countdown.days} jours. Vous recevrez un email de confirmation.
                             </div>
                         )}
 

@@ -21,10 +21,10 @@ type SignInFormValues = z.infer<typeof signInSchema>
 function useCountdown() {
     const [target] = useState(() => {
         if (typeof window !== "undefined") {
-            const stored = localStorage.getItem("countdown_target_1111")
+            const stored = localStorage.getItem("launch_date_1111")
             if (stored) return parseInt(stored, 10)
             const t = Date.now() + 30 * 24 * 60 * 60 * 1000
-            localStorage.setItem("countdown_target_1111", t.toString())
+            localStorage.setItem("launch_date_1111", t.toString())
             return t
         }
         return Date.now() + 30 * 24 * 60 * 60 * 1000
@@ -53,6 +53,7 @@ function useCountdown() {
 export default function SignInPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [success, setSuccess] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { login } = useAuth()
     const countdown = useCountdown()
@@ -67,9 +68,11 @@ export default function SignInPage() {
 
     const onSubmit = async (data: SignInFormValues) => {
         setError(null)
+        setSuccess(false)
         setIsLoading(true)
         try {
             await login(data)
+            setSuccess(true)
         } catch (err: any) {
             setError(err.response?.data?.detail || "Email ou mot de passe incorrect")
         } finally {
@@ -214,6 +217,12 @@ export default function SignInPage() {
                         {error && (
                             <div className="mb-4 rounded-xl bg-red-50 border border-red-200 p-3 text-sm text-red-600 font-medium animate-shake">
                                 {error}
+                            </div>
+                        )}
+
+                        {success && (
+                            <div className="mb-4 rounded-xl bg-green-50 border border-green-200 p-3 text-sm text-green-600 font-medium">
+                                ✅ Connexion réussie ! Le site ouvrira dans {countdown.days} jours. Vous serez notifié par email.
                             </div>
                         )}
 

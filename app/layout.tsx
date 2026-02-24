@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     "mytek prix",
     "tunisianet prix",
     "spacenet prix",
+    "technopro prix",
+    "darty prix",
   ],
   authors: [{ name: "1111.tn" }],
   creator: "1111.tn",
@@ -89,6 +91,7 @@ export const metadata: Metadata = {
 };
 
 import { getUserFromServer } from "@/lib/auth-server";
+import Chatbot from "@/components/Chatbot";
 
 export default async function RootLayout({
   children,
@@ -98,10 +101,11 @@ export default async function RootLayout({
   const user = await getUserFromServer();
 
   return (
-    <html lang="fr" dir="ltr">
+    <html lang="fr" dir="ltr" suppressHydrationWarning>
       <head>
         <link rel="canonical" href={BASE_URL} />
         <script
+          suppressHydrationWarning
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -127,6 +131,7 @@ export default async function RootLayout({
           <AuthProvider initialUser={user}>
             <BagProvider>
               {children}
+              <Chatbot />
             </BagProvider>
           </AuthProvider>
         </GoogleProvider>

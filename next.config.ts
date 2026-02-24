@@ -64,6 +64,7 @@ const nextConfig: NextConfig = {
     '192.168.1.106:3000',
     '192.168.1.106',
   ],
+  // rewrites removed to use direct API connection
 };
 
 export default nextConfig;

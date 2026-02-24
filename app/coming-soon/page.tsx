@@ -5,8 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import "./coming-soon.css";
 
-// ---- Launch date: March 15, 2026 ----
-const LAUNCH_DATE = new Date("2026-03-15T00:00:00").getTime();
+// ---- Launch date: 30 days from first visit ----
+function getLaunchDate(): number {
+  if (typeof window === 'undefined') {
+    // Server-side: use 30 days from now
+    return Date.now() + 30 * 24 * 60 * 60 * 1000;
+  }
+  
+  // Client-side: get or set launch date in localStorage
+  const stored = localStorage.getItem('launch_date_1111');
+  if (stored) {
+    return parseInt(stored, 10);
+  }
+  
+  const launchDate = Date.now() + 30 * 24 * 60 * 60 * 1000;
+  localStorage.setItem('launch_date_1111', launchDate.toString());
+  return launchDate;
+}
 
 interface TimeLeft {
   days: number;
@@ -17,7 +32,8 @@ interface TimeLeft {
 
 function getTimeLeft(): TimeLeft {
   const now = Date.now();
-  const diff = Math.max(LAUNCH_DATE - now, 0);
+  const launchDate = getLaunchDate();
+  const diff = Math.max(launchDate - now, 0);
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
     hours: Math.floor((diff / (1000 * 60 * 60)) % 24),

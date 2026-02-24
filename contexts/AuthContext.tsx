@@ -44,12 +44,7 @@ export const AuthProvider = ({ children, initialUser }: { children: React.ReactN
         const response = await signinAction(data);
         if (response.success && response.user) {
             setUser(response.user);
-            const role = response.user.role;
-            if (role === 'admin') {
-                router.push('/dashboard');
-            } else {
-                router.push('/');
-            }
+            // Site is closed - don't redirect anywhere, just stay on signin page
             router.refresh();
         } else {
             throw new Error(response.error || 'Login failed');
@@ -59,7 +54,8 @@ export const AuthProvider = ({ children, initialUser }: { children: React.ReactN
     const signup = async (data: any) => {
         const response = await signupAction(data);
         if (response.success) {
-            router.push('/signin');
+            // Site is closed - don't redirect to signin, just stay on signup page
+            // User will see success message on the same page
         } else {
             throw new Error(response.error || 'Signup failed');
         }
@@ -68,7 +64,7 @@ export const AuthProvider = ({ children, initialUser }: { children: React.ReactN
     const logout = async () => {
         await logoutAction();
         setUser(null);
-        router.push('/signin');
+        router.push('/signup');
         router.refresh();
     };
 
@@ -76,12 +72,7 @@ export const AuthProvider = ({ children, initialUser }: { children: React.ReactN
         try {
             const response = await googleLoginAction(credential);
             if (response.success && response.data) {
-                // We might need to fetch user if action doesn't return it full
-                // But let's assume I'll update googleLoginAction too or accept the refresh to handle it.
-                // For now, let's refresh page to let layout fetch user? Or fetch it?
-                // Better: update googleLoginAction to return user like signinAction.
-                // Assuming I will do that next.
-                router.push('/');
+                // Site is closed - don't redirect anywhere, just refresh to update user state
                 router.refresh();
             }
         } catch (error) {
