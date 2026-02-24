@@ -193,13 +193,12 @@ export default function SignUpPage() {
             </div>
 
             {/* Right Side - Floating Sign Up Form */}
-            <div className="relative flex w-full items-center justify-center p-6 lg:w-1/2 z-10">
-                <div className="w-full max-w-md animate-fade-in-up">
-                    {/* Mobile countdown */}
-                    <div className="mb-6 lg:hidden text-center">
-                        <div className="flex items-center justify-center gap-2 mb-3">
-                            <Rocket className="size-4 text-blue-600 animate-pulse" />
-                            <span className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600">
+            <div className="relative flex w-full items-center justify-center p-3 md:p-6 lg:w-1/2 z-10">
+                <div className="w-full max-w-md animate-fade-in-up">{/* Mobile countdown */}
+                    <div className="mt-12 mb-3 lg:hidden text-center">
+                        <div className="flex items-center justify-center gap-2 mb-2">
+                            <Rocket className="size-3 text-blue-600 animate-pulse" />
+                            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-blue-600">
                                 Disponible bientôt
                             </span>
                         </div>
@@ -211,9 +210,9 @@ export default function SignUpPage() {
                                 { value: countdown.seconds, label: "S" },
                             ].map((item, i) => (
                                 <React.Fragment key={item.label}>
-                                    {i > 0 && <span className="text-lg font-bold text-blue-400">:</span>}
-                                    <div className="w-12 h-12 rounded-xl bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow flex items-center justify-center">
-                                        <span className="text-xl font-black text-blue-700 tabular-nums">
+                                    {i > 0 && <span className="text-base font-bold text-blue-400">:</span>}
+                                    <div className="w-10 h-10 rounded-lg bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow flex items-center justify-center">
+                                        <span className="text-base font-black text-blue-700 tabular-nums">
                                             {String(item.value).padStart(2, "0")}
                                         </span>
                                     </div>
@@ -223,8 +222,8 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Mascot */}
-                    <div className="flex justify-center mb-6 animate-bounce-gentle">
-                        <div className="relative w-40 h-48">
+                    <div className="flex justify-center mb-4 animate-bounce-gentle">
+                        <div className="relative w-24 h-32">
                             <Image
                                 src="/images/1111hand.png"
                                 alt="Mascotte 1111"
@@ -236,43 +235,43 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Floating form card */}
-                    <div className="rounded-3xl bg-white/70 backdrop-blur-xl p-8 shadow-2xl shadow-blue-900/10 border border-white/50 hover:shadow-blue-900/15 transition-shadow duration-500">
+                    <div className="rounded-3xl bg-white/70 backdrop-blur-xl p-4 md:p-6 shadow-2xl shadow-blue-900/10 border border-white/50 hover:shadow-blue-900/15 transition-shadow duration-500">
                         {/* Header */}
-                        <div className="mb-6 text-center">
-                            <div className="lg:hidden flex justify-center mb-4">
+                        <div className="mb-3 text-center">
+                            <div className="lg:hidden flex justify-center mb-2">
                                 <Image
                                     src="/images/Logo 1111.svg"
                                     alt="1111.tn"
-                                    width={100}
-                                    height={36}
-                                    className="h-9 w-auto object-contain"
+                                    width={80}
+                                    height={28}
+                                    className="h-7 w-auto object-contain"
                                 />
                             </div>
-                            <h1 className="mb-1.5 text-2xl font-extrabold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
+                            <h1 className="mb-1 text-xl font-extrabold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
                                 Créer un compte
                             </h1>
-                            <p className="text-sm text-slate-500">
+                            <p className="text-xs text-slate-500">
                                 Rejoignez 1111 et soyez les premiers informés.
                             </p>
                         </div>
 
                         {error && (
-                            <div className="mb-4 rounded-xl bg-red-50 border border-red-200 p-3 text-sm text-red-600 font-medium animate-shake">
+                            <div className="mb-2 rounded-xl bg-red-50 border border-red-200 p-2 text-xs text-red-600 font-medium animate-shake">
                                 {error}
                             </div>
                         )}
 
                         {success && mounted && (
-                            <div className="mb-4 rounded-xl bg-green-50 border border-green-200 p-3 text-sm text-green-600 font-medium">
-                                ✅ Inscription réussie ! Votre compte a été créé. Le site ouvrira dans {countdown.days} jours. Vous recevrez un email de confirmation.
+                            <div className="mb-2 rounded-xl bg-green-50 border border-green-200 p-2 text-xs text-green-600 font-medium">
+                                ✅ Inscription réussie ! Votre compte a été créé. Le site ouvrira dans {countdown.days} jours.
                             </div>
                         )}
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
                             {/* Name */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="name" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1">
+                                <label htmlFor="name" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Nom complet
                                 </label>
                                 <input
@@ -280,14 +279,14 @@ export default function SignUpPage() {
                                     type="text"
                                     {...register("name")}
                                     placeholder="Votre nom"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
-                                {errors.name && <span className="text-xs text-red-500 font-medium">{errors.name.message}</span>}
+                                {errors.name && <span className="text-[10px] text-red-500 font-medium">{errors.name.message}</span>}
                             </div>
 
                             {/* Email */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="email" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1">
+                                <label htmlFor="email" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Email
                                 </label>
                                 <input
@@ -295,14 +294,14 @@ export default function SignUpPage() {
                                     type="email"
                                     {...register("email")}
                                     placeholder="vous@exemple.com"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
-                                {errors.email && <span className="text-xs text-red-500 font-medium">{errors.email.message}</span>}
+                                {errors.email && <span className="text-[10px] text-red-500 font-medium">{errors.email.message}</span>}
                             </div>
 
                             {/* Phone */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="phone" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1">
+                                <label htmlFor="phone" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Téléphone
                                 </label>
                                 <input
@@ -310,14 +309,14 @@ export default function SignUpPage() {
                                     type="tel"
                                     {...register("phone")}
                                     placeholder="+216 XX XXX XXX"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
-                                {errors.phone && <span className="text-xs text-red-500 font-medium">{errors.phone.message}</span>}
+                                {errors.phone && <span className="text-[10px] text-red-500 font-medium">{errors.phone.message}</span>}
                             </div>
 
                             {/* Address */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="address" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1">
+                                <label htmlFor="address" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Adresse
                                 </label>
                                 <input
@@ -325,14 +324,14 @@ export default function SignUpPage() {
                                     type="text"
                                     {...register("address")}
                                     placeholder="Votre adresse"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
-                                {errors.address && <span className="text-xs text-red-500 font-medium">{errors.address.message}</span>}
+                                {errors.address && <span className="text-[10px] text-red-500 font-medium">{errors.address.message}</span>}
                             </div>
 
                             {/* Password */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="password" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1">
+                                <label htmlFor="password" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Mot de passe
                                 </label>
                                 <div className="relative">
@@ -341,22 +340,22 @@ export default function SignUpPage() {
                                         type={showPassword ? "text" : "password"}
                                         {...register("password")}
                                         placeholder="Créer un mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-3 pr-12 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500 transition-colors"
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500 transition-colors"
                                     >
-                                        {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+                                        {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                                     </button>
                                 </div>
-                                {errors.password && <span className="text-xs text-red-500 font-medium">{errors.password.message}</span>}
+                                {errors.password && <span className="text-[10px] text-red-500 font-medium">{errors.password.message}</span>}
                             </div>
 
                             {/* Confirm Password */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="confirmPassword" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1">
+                                <label htmlFor="confirmPassword" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Confirmer le mot de passe
                                 </label>
                                 <div className="relative">
@@ -365,34 +364,34 @@ export default function SignUpPage() {
                                         type={showConfirmPassword ? "text" : "password"}
                                         {...register("confirmPassword")}
                                         placeholder="Confirmer votre mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-3 pr-12 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500 transition-colors"
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500 transition-colors"
                                     >
-                                        {showConfirmPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+                                        {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                                     </button>
                                 </div>
-                                {errors.confirmPassword && <span className="text-xs text-red-500 font-medium">{errors.confirmPassword.message}</span>}
+                                {errors.confirmPassword && <span className="text-[10px] text-red-500 font-medium">{errors.confirmPassword.message}</span>}
                             </div>
 
                             {/* Submit Button */}
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+                                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
                             >
                                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin inline" /> : null}
-                                {isLoading ? "Inscription en cours..." : "S'inscrire"}
+                                {isLoading ? "Inscription..." : "S'inscrire"}
                             </button>
                         </form>
 
                         {/* Divider */}
-                        <div className="my-5 flex items-center gap-4">
+                        <div className="my-3 flex items-center gap-3">
                             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
-                            <span className="text-xs font-medium text-slate-400">ou</span>
+                            <span className="text-[10px] font-medium text-slate-400">ou</span>
                             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
                         </div>
 
@@ -400,7 +399,7 @@ export default function SignUpPage() {
                         <GoogleAuthButton />
 
                         {/* Sign In Link */}
-                        <p className="mt-5 text-center text-sm text-slate-500">
+                        <p className="mt-3 text-center text-xs text-slate-500">
                             Vous avez déjà un compte?{" "}
                             <Link href="/signin" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
                                 Connectez-vous.

@@ -11,6 +11,7 @@ interface Message {
 }
 
 export default function Chatbot() {
+    const [mounted, setMounted] = useState(false)
     const [open, setOpen] = useState(false)
     const [messages, setMessages] = useState<Message[]>([])
     const [input, setInput] = useState("")
@@ -18,6 +19,11 @@ export default function Chatbot() {
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
     const idRef = useRef(0)
+
+    // Prevent hydration mismatch
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     // Auto-scroll to bottom
     useEffect(() => {
@@ -117,6 +123,9 @@ export default function Chatbot() {
         "Quels sont vos tarifs ?",
         "Fausses promotions",
     ]
+
+    // Prevent hydration mismatch
+    if (!mounted) return null
 
     return (
         <>
