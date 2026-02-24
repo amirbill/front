@@ -226,7 +226,7 @@ export default function SignUpPage() {
                     <div className="flex justify-center mb-4 animate-bounce-gentle">
                         <div className="relative w-24 h-32">
                             <Image
-                                src="/images/1111hand.png"
+                                src="/images/1.png"
                                 alt="Mascotte 1111"
                                 fill
                                 className="object-contain drop-shadow-lg"

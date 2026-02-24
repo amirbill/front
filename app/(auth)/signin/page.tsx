@@ -208,7 +208,7 @@ export default function SignInPage() {
                     <div className="flex justify-center mb-6 animate-bounce-gentle">
                         <div className="relative w-40 h-48">
                             <Image
-                                src="/images/1111hand.png"
+                                src="/images/1.png"
                                 alt="Mascotte 1111"
                                 fill
                                 className="object-contain drop-shadow-lg"
