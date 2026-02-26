@@ -102,22 +102,23 @@ export default function SignUpPage() {
     }
 
     return (
-        <div className="relative flex min-h-screen overflow-hidden">
-            {/* Video background - high quality */}
-            <div className="absolute inset-0">
+        <div className="relative flex min-h-screen min-h-[100dvh] overflow-hidden">
+            {/* Video background - responsive */}
+            <div className="fixed inset-0 z-0">
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
+                    poster="/images/Logo 1111.svg"
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
                 >
                     <source src="/videos/1111_vid.mp4" type="video/mp4" />
                 </video>
-                {/* Very light overlay to maintain text readability */}
-                <div className="absolute inset-0 bg-white/10" />
+                {/* Overlay - stronger on mobile for readability */}
+                <div className="absolute inset-0 bg-white/30 sm:bg-white/20 lg:bg-white/10" />
             </div>
 
             {/* Left Side - Branding + Countdown */}
@@ -195,35 +196,52 @@ export default function SignUpPage() {
 
             {/* Right Side - Floating Sign Up Form */}
             <div className="relative flex w-full items-center justify-center p-3 md:p-6 lg:w-1/2 z-10">
-                <div className="w-full max-w-md animate-fade-in-up">{/* Mobile countdown */}
-                    <div className="mt-12 mb-3 lg:hidden text-center">
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                            <Rocket className="size-3 text-blue-600 animate-pulse" />
-                            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-blue-600">
-                                Disponible bientôt
-                            </span>
+                <div className="w-full max-w-md animate-fade-in-up">
+                    {/* Mobile: Mascot first, Countdown second | Desktop: hidden (shown on left side) */}
+                    <div className="flex flex-col items-center lg:hidden mt-6 mb-2">
+                        {/* Mascot - shown first on mobile */}
+                        <div className="flex justify-center mb-8 animate-bounce-gentle">
+                            <div className="relative w-14 h-14">
+                                <Image
+                                    src="/images/1.png"
+                                    alt="Mascotte 1111"
+                                    fill
+                                    className="object-contain drop-shadow-lg"
+                                    priority
+                                />
+                            </div>
                         </div>
-                        <div className="flex items-center justify-center gap-2">
-                            {mounted && [
-                                { value: countdown.days, label: "J" },
-                                { value: countdown.hours, label: "H" },
-                                { value: countdown.minutes, label: "M" },
-                                { value: countdown.seconds, label: "S" },
-                            ].map((item, i) => (
-                                <React.Fragment key={item.label}>
-                                    {i > 0 && <span className="text-base font-bold text-blue-400">:</span>}
-                                    <div className="w-10 h-10 rounded-lg bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow flex items-center justify-center">
-                                        <span className="text-base font-black text-blue-700 tabular-nums">
-                                            {String(item.value).padStart(2, "0")}
-                                        </span>
-                                    </div>
-                                </React.Fragment>
-                            ))}
+
+                        {/* Countdown - shown second on mobile */}
+                        <div className="text-center">
+                            <div className="flex items-center justify-center gap-2 mb-2">
+                                <Rocket className="size-3 text-blue-600 animate-pulse" />
+                                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-blue-600">
+                                    Disponible bientôt
+                                </span>
+                            </div>
+                            <div className="flex items-center justify-center gap-2">
+                                {mounted && [
+                                    { value: countdown.days, label: "J" },
+                                    { value: countdown.hours, label: "H" },
+                                    { value: countdown.minutes, label: "M" },
+                                    { value: countdown.seconds, label: "S" },
+                                ].map((item, i) => (
+                                    <React.Fragment key={item.label}>
+                                        {i > 0 && <span className="text-base font-bold text-blue-400">:</span>}
+                                        <div className="w-10 h-10 rounded-lg bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow flex items-center justify-center">
+                                            <span className="text-base font-black text-blue-700 tabular-nums">
+                                                {String(item.value).padStart(2, "0")}
+                                            </span>
+                                        </div>
+                                    </React.Fragment>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
-                    {/* Mascot */}
-                    <div className="flex justify-center mb-4 animate-bounce-gentle">
+                    {/* Mascot - desktop only (hidden on mobile since it's in the block above) */}
+                    <div className="hidden lg:flex justify-center mb-4 animate-bounce-gentle">
                         <div className="relative w-24 h-32">
                             <Image
                                 src="/images/1.png"
