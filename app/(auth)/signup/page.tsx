@@ -13,7 +13,7 @@ import { GoogleAuthButton } from "@/components/GoogleAuthButton"
 const signUpSchema = z.object({
     name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
     email: z.string().email("Email invalide"),
-    phone: z.string().min(8, "Numéro de téléphone invalide"),
+    phone: z.string().min(8, "Numéro WhatsApp invalide"),
     address: z.string().min(5, "Adresse trop courte"),
     password: z.string().min(8, "Le mot de passe doit contenir au moins 8 caractères"),
     confirmPassword: z.string()
@@ -63,6 +63,7 @@ export default function SignUpPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [videoLoaded, setVideoLoaded] = useState(false)
     const [success, setSuccess] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { signup } = useAuth()
@@ -103,17 +104,19 @@ export default function SignUpPage() {
 
     return (
         <div className="relative flex min-h-screen min-h-[100dvh] lg:h-screen lg:h-[100dvh] lg:overflow-hidden">
-            {/* Video background - responsive */}
+            {/* Gradient fallback + Video background */}
             <div className="fixed inset-0 z-0">
+                {/* Instant gradient background while video loads */}
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-200 via-orange-100 to-amber-200" />
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
-                    poster="/images/Logo 1111.svg"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    onLoadedData={() => setVideoLoaded(true)}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+                    style={{ objectFit: 'cover', objectPosition: 'center', opacity: videoLoaded ? 1 : 0 }}
                 >
                     <source src="/videos/1111_vid.mp4" type="video/mp4" />
                 </video>
@@ -321,7 +324,7 @@ export default function SignUpPage() {
                             {/* Phone */}
                             <div className="space-y-0.5">
                                 <label htmlFor="phone" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
-                                    Téléphone
+                                    Numéro WhatsApp
                                 </label>
                                 <input
                                     id="phone"

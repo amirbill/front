@@ -56,6 +56,7 @@ export default function SignInPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [success, setSuccess] = useState(false)
+    const [videoLoaded, setVideoLoaded] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { login } = useAuth()
     const { timeLeft: countdown, mounted } = useCountdown()
@@ -84,17 +85,19 @@ export default function SignInPage() {
 
     return (
         <div className="relative flex min-h-screen min-h-[100dvh] lg:h-screen lg:h-[100dvh] lg:overflow-hidden">
-            {/* Video background - responsive */}
+            {/* Gradient fallback + Video background */}
             <div className="fixed inset-0 z-0">
+                {/* Instant gradient background while video loads */}
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-200 via-orange-100 to-amber-200" />
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
-                    poster="/images/Logo 1111.svg"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    onLoadedData={() => setVideoLoaded(true)}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+                    style={{ objectFit: 'cover', objectPosition: 'center', opacity: videoLoaded ? 1 : 0 }}
                 >
                     <source src="/videos/1111_vid.mp4" type="video/mp4" />
                 </video>
