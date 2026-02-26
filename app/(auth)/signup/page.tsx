@@ -102,7 +102,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <div className="relative flex min-h-screen min-h-[100dvh] overflow-hidden">
+        <div className="relative flex min-h-screen min-h-[100dvh] lg:h-screen lg:h-[100dvh] lg:overflow-hidden">
             {/* Video background - responsive */}
             <div className="fixed inset-0 z-0">
                 <video
@@ -122,7 +122,7 @@ export default function SignUpPage() {
             </div>
 
             {/* Left Side - Branding + Countdown */}
-            <div className="relative hidden w-1/2 flex-col justify-between p-10 lg:flex z-10">
+            <div className="relative hidden w-1/2 flex-col justify-between p-8 lg:flex z-10">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
                     <Image
@@ -136,8 +136,8 @@ export default function SignUpPage() {
                 </div>
 
                 {/* Center: Mascot + Countdown */}
-                <div className="flex flex-1 flex-col items-center justify-center gap-8">
-                    <div className="relative h-72 w-72 animate-fade-in-up">
+                <div className="flex flex-1 flex-col items-center justify-center gap-5">
+                    <div className="relative h-48 w-48 animate-fade-in-up">
                         <Image
                             src="/images/1.png"
                             alt="1111 Mascot"
@@ -154,7 +154,7 @@ export default function SignUpPage() {
 
                     {/* Countdown */}
                     <div className="animate-fade-in-up-delay text-center">
-                        <div className="flex items-center justify-center gap-2 mb-4">
+                        <div className="flex items-center justify-center gap-2 mb-3">
                             <Rocket className="size-5 text-blue-600 animate-pulse" />
                             <span className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
                                 Disponible bientôt
@@ -172,9 +172,9 @@ export default function SignUpPage() {
                                 <React.Fragment key={item.label}>
                                     {i > 0 && <span className="text-2xl font-bold text-blue-400 animate-pulse">:</span>}
                                     <div className="flex flex-col items-center">
-                                        <div className="relative w-[72px] h-[72px] rounded-2xl bg-white/80 backdrop-blur-md border-2 border-blue-200/60 shadow-lg flex items-center justify-center overflow-hidden group hover:scale-105 transition-transform duration-300">
+                                        <div className="relative w-[56px] h-[56px] rounded-2xl bg-white/80 backdrop-blur-md border-2 border-blue-200/60 shadow-lg flex items-center justify-center overflow-hidden group hover:scale-105 transition-transform duration-300">
                                             <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent" />
-                                            <span className="relative text-3xl font-black text-blue-700 tabular-nums">
+                                            <span className="relative text-2xl font-black text-blue-700 tabular-nums">
                                                 {String(item.value).padStart(2, "0")}
                                             </span>
                                         </div>
@@ -195,7 +195,7 @@ export default function SignUpPage() {
             </div>
 
             {/* Right Side - Floating Sign Up Form */}
-            <div className="relative flex w-full items-center justify-center p-3 md:p-6 lg:w-1/2 z-10">
+            <div className="relative flex w-full items-center justify-center p-2 md:p-4 lg:w-1/2 z-10">
                 <div className="w-full max-w-md animate-fade-in-up">
                     {/* Mobile: Mascot first, Countdown second | Desktop: hidden (shown on left side) */}
                     <div className="flex flex-col items-center lg:hidden mt-6 mb-2">
@@ -241,8 +241,8 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Mascot - desktop only (hidden on mobile since it's in the block above) */}
-                    <div className="hidden lg:flex justify-center mb-4 animate-bounce-gentle">
-                        <div className="relative w-24 h-32">
+                    <div className="hidden lg:flex justify-center mb-2 animate-bounce-gentle">
+                        <div className="relative w-16 h-20">
                             <Image
                                 src="/images/1.png"
                                 alt="Mascotte 1111"
@@ -254,9 +254,9 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Floating form card */}
-                    <div className="rounded-3xl bg-white/70 backdrop-blur-xl p-4 md:p-6 shadow-2xl shadow-blue-900/10 border border-white/50 hover:shadow-blue-900/15 transition-shadow duration-500">
+                    <div className="rounded-3xl bg-white/70 backdrop-blur-xl p-3 md:p-5 shadow-2xl shadow-blue-900/10 border border-white/50 hover:shadow-blue-900/15 transition-shadow duration-500">
                         {/* Header */}
-                        <div className="mb-3 text-center">
+                        <div className="mb-2 text-center">
                             <div className="lg:hidden flex justify-center mb-2">
                                 <Image
                                     src="/images/Logo 1111.svg"
@@ -287,9 +287,9 @@ export default function SignUpPage() {
                         )}
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-1.5">
                             {/* Name */}
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <label htmlFor="name" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Nom complet
                                 </label>
@@ -298,13 +298,13 @@ export default function SignUpPage() {
                                     type="text"
                                     {...register("name")}
                                     placeholder="Votre nom"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
                                 {errors.name && <span className="text-[10px] text-red-500 font-medium">{errors.name.message}</span>}
                             </div>
 
                             {/* Email */}
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <label htmlFor="email" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Email
                                 </label>
@@ -313,13 +313,13 @@ export default function SignUpPage() {
                                     type="email"
                                     {...register("email")}
                                     placeholder="vous@exemple.com"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
                                 {errors.email && <span className="text-[10px] text-red-500 font-medium">{errors.email.message}</span>}
                             </div>
 
                             {/* Phone */}
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <label htmlFor="phone" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Téléphone
                                 </label>
@@ -328,13 +328,13 @@ export default function SignUpPage() {
                                     type="tel"
                                     {...register("phone")}
                                     placeholder="+216 XX XXX XXX"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
                                 {errors.phone && <span className="text-[10px] text-red-500 font-medium">{errors.phone.message}</span>}
                             </div>
 
                             {/* Address */}
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <label htmlFor="address" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Adresse
                                 </label>
@@ -343,13 +343,13 @@ export default function SignUpPage() {
                                     type="text"
                                     {...register("address")}
                                     placeholder="Votre adresse"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                 />
                                 {errors.address && <span className="text-[10px] text-red-500 font-medium">{errors.address.message}</span>}
                             </div>
 
                             {/* Password */}
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <label htmlFor="password" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Mot de passe
                                 </label>
@@ -359,7 +359,7 @@ export default function SignUpPage() {
                                         type={showPassword ? "text" : "password"}
                                         {...register("password")}
                                         placeholder="Créer un mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                     />
                                     <button
                                         type="button"
@@ -373,7 +373,7 @@ export default function SignUpPage() {
                             </div>
 
                             {/* Confirm Password */}
-                            <div className="space-y-1">
+                            <div className="space-y-0.5">
                                 <label htmlFor="confirmPassword" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Confirmer le mot de passe
                                 </label>
@@ -383,7 +383,7 @@ export default function SignUpPage() {
                                         type={showConfirmPassword ? "text" : "password"}
                                         {...register("confirmPassword")}
                                         placeholder="Confirmer votre mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-2 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
                                     />
                                     <button
                                         type="button"
@@ -408,7 +408,7 @@ export default function SignUpPage() {
                         </form>
 
                         {/* Divider */}
-                        <div className="my-3 flex items-center gap-3">
+                        <div className="my-2 flex items-center gap-3">
                             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
                             <span className="text-[10px] font-medium text-slate-400">ou</span>
                             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
@@ -418,7 +418,7 @@ export default function SignUpPage() {
                         <GoogleAuthButton />
 
                         {/* Sign In Link */}
-                        <p className="mt-3 text-center text-xs text-slate-500">
+                        <p className="mt-2 text-center text-xs text-slate-500">
                             Vous avez déjà un compte?{" "}
                             <Link href="/signin" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
                                 Connectez-vous.

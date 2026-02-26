@@ -91,7 +91,6 @@ export const metadata: Metadata = {
 };
 
 import { getUserFromServer } from "@/lib/auth-server";
-import Chatbot from "@/components/Chatbot";
 
 export default async function RootLayout({
   children,
@@ -132,7 +131,6 @@ export default async function RootLayout({
           <AuthProvider initialUser={user}>
             <BagProvider>
               {children}
-              <Chatbot />
             </BagProvider>
           </AuthProvider>
         </GoogleProvider>
