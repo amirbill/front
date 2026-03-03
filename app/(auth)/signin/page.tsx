@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useAuth } from "@/contexts/AuthContext"
 import { GoogleAuthButton } from "@/components/GoogleAuthButton"
+import { useRouter } from "next/navigation"
 
 const signInSchema = z.object({
     email: z.string().email("Email invalide"),
@@ -60,6 +61,7 @@ export default function SignInPage() {
     const [isLoading, setIsLoading] = useState(false)
     const { login } = useAuth()
     const { timeLeft: countdown, mounted } = useCountdown()
+    const router = useRouter()
 
     const {
         register,
@@ -77,7 +79,12 @@ export default function SignInPage() {
             await login(data)
             setSuccess(true)
         } catch (err: any) {
-            setError(err.response?.data?.detail || "Email ou mot de passe incorrect")
+            const msg = err.message || err.response?.data?.detail || "Email ou mot de passe incorrect"
+            if (msg.toLowerCase().includes("not verified") || msg.toLowerCase().includes("non vérifié")) {
+                router.push(`/verify?email=${encodeURIComponent(data.email)}`)
+                return
+            }
+            setError(msg)
         } finally {
             setIsLoading(false)
         }
