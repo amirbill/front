@@ -121,11 +121,11 @@ export default function SignUpPage() {
                     <source src="/videos/1111_vid.mp4" type="video/mp4" />
                 </video>
                 {/* Overlay - stronger on mobile for readability */}
-                <div className="absolute inset-0 bg-white/30 sm:bg-white/20 lg:bg-white/10" />
+                <div className="absolute inset-0 bg-white/15 sm:bg-white/10 lg:bg-white/5" />
             </div>
 
             {/* Left Side - Branding + Countdown */}
-            <div className="relative hidden w-1/2 flex-col justify-between p-8 lg:flex z-10">
+            <div className="relative hidden w-1/2 flex-col justify-between p-6 xl:p-8 lg:flex z-10">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
                     <Image
@@ -140,7 +140,7 @@ export default function SignUpPage() {
 
                 {/* Center: Mascot + Countdown */}
                 <div className="flex flex-1 flex-col items-center justify-center gap-5">
-                    <div className="relative h-48 w-48 animate-fade-in-up">
+                    <div className="relative h-36 w-36 xl:h-48 xl:w-48 animate-fade-in-up">
                         <Image
                             src="/images/1.png"
                             alt="1111 Mascot"
@@ -175,9 +175,9 @@ export default function SignUpPage() {
                                 <React.Fragment key={item.label}>
                                     {i > 0 && <span className="text-2xl font-bold text-blue-400 animate-pulse">:</span>}
                                     <div className="flex flex-col items-center">
-                                        <div className="relative w-[56px] h-[56px] rounded-2xl bg-white/80 backdrop-blur-md border-2 border-blue-200/60 shadow-lg flex items-center justify-center overflow-hidden group hover:scale-105 transition-transform duration-300">
+                                        <div className="relative w-[46px] h-[46px] xl:w-[56px] xl:h-[56px] rounded-2xl bg-white/40 backdrop-blur-md border-2 border-blue-200/30 shadow-lg flex items-center justify-center overflow-hidden group hover:scale-105 transition-transform duration-300">
                                             <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent" />
-                                            <span className="relative text-2xl font-black text-blue-700 tabular-nums">
+                                            <span className="relative text-xl xl:text-2xl font-black text-blue-700 tabular-nums">
                                                 {String(item.value).padStart(2, "0")}
                                             </span>
                                         </div>
@@ -192,19 +192,19 @@ export default function SignUpPage() {
                 </div>
 
                 {/* Tagline */}
-                <p className="max-w-md text-base italic text-blue-600/70 font-medium">
+                <p className="max-w-md text-sm xl:text-base italic text-blue-600/70 font-medium">
                     {'"'}Toutes les offres, les vrais prix et les meilleures décisions au même endroit.{'"'}
                 </p>
             </div>
 
             {/* Right Side - Floating Sign Up Form */}
-            <div className="relative flex w-full items-center justify-center p-2 md:p-4 lg:w-1/2 z-10">
-                <div className="w-full max-w-md animate-fade-in-up">
+            <div className="relative flex w-full items-start sm:items-center justify-center px-2 py-3 sm:p-3 md:p-4 lg:p-4 lg:w-1/2 z-10 lg:overflow-y-auto">
+                <div className="w-full max-w-[360px] sm:max-w-md animate-fade-in-up my-auto">
                     {/* Mobile: Mascot first, Countdown second | Desktop: hidden (shown on left side) */}
-                    <div className="flex flex-col items-center lg:hidden mt-6 mb-2">
+                    <div className="flex flex-col items-center lg:hidden mt-2 sm:mt-6 mb-1 sm:mb-2">
                         {/* Mascot - shown first on mobile */}
-                        <div className="flex justify-center mb-8 animate-bounce-gentle">
-                            <div className="relative w-14 h-14">
+                        <div className="flex justify-center mb-3 sm:mb-8 animate-bounce-gentle">
+                            <div className="relative w-10 h-10 sm:w-14 sm:h-14">
                                 <Image
                                     src="/images/1.png"
                                     alt="Mascotte 1111"
@@ -223,7 +223,7 @@ export default function SignUpPage() {
                                     Disponible bientôt
                                 </span>
                             </div>
-                            <div className="flex items-center justify-center gap-2">
+                            <div className="flex items-center justify-center gap-1.5 sm:gap-2">
                                 {mounted && [
                                     { value: countdown.days, label: "J" },
                                     { value: countdown.hours, label: "H" },
@@ -231,9 +231,9 @@ export default function SignUpPage() {
                                     { value: countdown.seconds, label: "S" },
                                 ].map((item, i) => (
                                     <React.Fragment key={item.label}>
-                                        {i > 0 && <span className="text-base font-bold text-blue-400">:</span>}
-                                        <div className="w-10 h-10 rounded-lg bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow flex items-center justify-center">
-                                            <span className="text-base font-black text-blue-700 tabular-nums">
+                                        {i > 0 && <span className="text-sm sm:text-base font-bold text-blue-400">:</span>}
+                                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-md sm:rounded-lg bg-white/40 backdrop-blur-sm border border-blue-200/30 shadow flex items-center justify-center">
+                                            <span className="text-sm sm:text-base font-black text-blue-700 tabular-nums">
                                                 {String(item.value).padStart(2, "0")}
                                             </span>
                                         </div>
@@ -244,8 +244,8 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Mascot - desktop only (hidden on mobile since it's in the block above) */}
-                    <div className="hidden lg:flex justify-center mb-2 animate-bounce-gentle">
-                        <div className="relative w-16 h-20">
+                    <div className="hidden lg:flex justify-center mb-1 xl:mb-2 animate-bounce-gentle">
+                        <div className="relative w-12 h-16 xl:w-16 xl:h-20">
                             <Image
                                 src="/images/1.png"
                                 alt="Mascotte 1111"
@@ -257,19 +257,19 @@ export default function SignUpPage() {
                     </div>
 
                     {/* Floating form card */}
-                    <div className="rounded-3xl bg-white/70 backdrop-blur-xl p-3 md:p-5 shadow-2xl shadow-blue-900/10 border border-white/50 hover:shadow-blue-900/15 transition-shadow duration-500">
+                    <div className="rounded-2xl sm:rounded-3xl bg-white/35 backdrop-blur-lg p-2.5 sm:p-3 md:p-5 shadow-2xl shadow-blue-900/10 border border-white/25 hover:shadow-blue-900/15 transition-shadow duration-500">
                         {/* Header */}
-                        <div className="mb-2 text-center">
-                            <div className="lg:hidden flex justify-center mb-2">
+                        <div className="mb-1.5 sm:mb-2 text-center">
+                            <div className="lg:hidden flex justify-center mb-1.5 sm:mb-2">
                                 <Image
                                     src="/images/Logo 1111.svg"
                                     alt="1111.tn"
                                     width={80}
                                     height={28}
-                                    className="h-7 w-auto object-contain"
+                                    className="h-6 sm:h-7 w-auto object-contain"
                                 />
                             </div>
-                            <h1 className="mb-1 text-xl font-extrabold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
+                            <h1 className="mb-0.5 sm:mb-1 text-lg sm:text-xl font-extrabold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
                                 Créer un compte
                             </h1>
                             <p className="text-xs text-slate-500">
@@ -290,8 +290,9 @@ export default function SignUpPage() {
                         )}
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-1.5">
-                            {/* Name */}
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-1 sm:space-y-1.5">
+                            {/* Name & Email - 2 columns on sm+ */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 sm:gap-x-3 gap-y-1 sm:gap-y-1.5">
                             <div className="space-y-0.5">
                                 <label htmlFor="name" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                                     Nom complet
@@ -301,7 +302,7 @@ export default function SignUpPage() {
                                     type="text"
                                     {...register("name")}
                                     placeholder="Votre nom"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                 />
                                 {errors.name && <span className="text-[10px] text-red-500 font-medium">{errors.name.message}</span>}
                             </div>
@@ -316,11 +317,14 @@ export default function SignUpPage() {
                                     type="email"
                                     {...register("email")}
                                     placeholder="vous@exemple.com"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                 />
                                 {errors.email && <span className="text-[10px] text-red-500 font-medium">{errors.email.message}</span>}
                             </div>
+                            </div>
 
+                            {/* Phone & Address - 2 columns on sm+ */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 sm:gap-x-3 gap-y-1 sm:gap-y-1.5">
                             {/* Phone */}
                             <div className="space-y-0.5">
                                 <label htmlFor="phone" className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
@@ -331,7 +335,7 @@ export default function SignUpPage() {
                                     type="tel"
                                     {...register("phone")}
                                     placeholder="+216 XX XXX XXX"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                 />
                                 {errors.phone && <span className="text-[10px] text-red-500 font-medium">{errors.phone.message}</span>}
                             </div>
@@ -346,9 +350,10 @@ export default function SignUpPage() {
                                     type="text"
                                     {...register("address")}
                                     placeholder="Votre adresse"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 py-1.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                 />
                                 {errors.address && <span className="text-[10px] text-red-500 font-medium">{errors.address.message}</span>}
+                            </div>
                             </div>
 
                             {/* Password */}
@@ -362,7 +367,7 @@ export default function SignUpPage() {
                                         type={showPassword ? "text" : "password"}
                                         {...register("password")}
                                         placeholder="Créer un mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 py-1.5 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                     />
                                     <button
                                         type="button"
@@ -386,7 +391,7 @@ export default function SignUpPage() {
                                         type={showConfirmPassword ? "text" : "password"}
                                         {...register("confirmPassword")}
                                         placeholder="Confirmer votre mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-3 py-1.5 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 py-1.5 pr-10 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                     />
                                     <button
                                         type="button"
@@ -403,7 +408,7 @@ export default function SignUpPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+                                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2 sm:py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
                             >
                                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin inline" /> : null}
                                 {isLoading ? "Inscription..." : "S'inscrire"}

@@ -102,11 +102,11 @@ export default function SignInPage() {
                     <source src="/videos/1111_vid.mp4" type="video/mp4" />
                 </video>
                 {/* Overlay - stronger on mobile for readability */}
-                <div className="absolute inset-0 bg-white/30 sm:bg-white/20 lg:bg-white/10" />
+                <div className="absolute inset-0 bg-white/15 sm:bg-white/10 lg:bg-white/5" />
             </div>
 
             {/* Left Side - Branding + Countdown */}
-            <div className="relative hidden w-1/2 flex-col justify-between p-8 lg:flex z-10">
+            <div className="relative hidden w-1/2 flex-col justify-between p-6 xl:p-8 lg:flex z-10">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
                     <Image
@@ -121,7 +121,7 @@ export default function SignInPage() {
 
                 {/* Center: Mascot + Countdown */}
                 <div className="flex flex-1 flex-col items-center justify-center gap-6">
-                    <div className="relative h-56 w-56 animate-fade-in-up">
+                    <div className="relative h-40 w-40 xl:h-56 xl:w-56 animate-fade-in-up">
                         <Image
                             src="/images/1.png"
                             alt="1111 Mascot"
@@ -156,9 +156,9 @@ export default function SignInPage() {
                                 <React.Fragment key={item.label}>
                                     {i > 0 && <span className="text-2xl font-bold text-blue-400 animate-pulse">:</span>}
                                     <div className="flex flex-col items-center">
-                                        <div className="relative w-[60px] h-[60px] rounded-2xl bg-white/80 backdrop-blur-md border-2 border-blue-200/60 shadow-lg flex items-center justify-center overflow-hidden group hover:scale-105 transition-transform duration-300">
+                                        <div className="relative w-[50px] h-[50px] xl:w-[60px] xl:h-[60px] rounded-2xl bg-white/40 backdrop-blur-md border-2 border-blue-200/30 shadow-lg flex items-center justify-center overflow-hidden group hover:scale-105 transition-transform duration-300">
                                             <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent" />
-                                            <span className="relative text-2xl font-black text-blue-700 tabular-nums">
+                                            <span className="relative text-xl xl:text-2xl font-black text-blue-700 tabular-nums">
                                                 {String(item.value).padStart(2, "0")}
                                             </span>
                                         </div>
@@ -173,19 +173,19 @@ export default function SignInPage() {
                 </div>
 
                 {/* Tagline */}
-                <p className="max-w-md text-base italic text-blue-600/70 font-medium">
+                <p className="max-w-md text-sm xl:text-base italic text-blue-600/70 font-medium">
                     {'"'}Toutes les offres, les vrais prix et les meilleures décisions au même endroit.{'"'}
                 </p>
             </div>
 
             {/* Right Side - Floating Sign In Form */}
-            <div className="relative flex w-full items-center justify-center p-4 lg:w-1/2 z-10">
-                <div className="w-full max-w-md animate-fade-in-up">
+            <div className="relative flex w-full items-start sm:items-center justify-center px-3 py-4 sm:p-4 md:p-6 lg:p-4 lg:w-1/2 z-10 lg:overflow-y-auto">
+                <div className="w-full max-w-[360px] sm:max-w-md animate-fade-in-up my-auto">
                     {/* Mobile: Mascot first, Countdown second | Desktop: hidden (shown on left side) */}
-                    <div className="flex flex-col items-center lg:hidden mb-4 -mt-2">
+                    <div className="flex flex-col items-center lg:hidden mb-2 sm:mb-4 -mt-1 sm:-mt-2">
                         {/* Mascot - shown first on mobile */}
-                        <div className="flex justify-center mb-8 animate-bounce-gentle">
-                            <div className="relative w-16 h-16">
+                        <div className="flex justify-center mb-4 sm:mb-8 animate-bounce-gentle">
+                            <div className="relative w-12 h-12 sm:w-16 sm:h-16">
                                 <Image
                                     src="/images/1.png"
                                     alt="Mascotte 1111"
@@ -204,7 +204,7 @@ export default function SignInPage() {
                                     Disponible bientôt
                                 </span>
                             </div>
-                            <div className="flex items-center justify-center gap-2">
+                            <div className="flex items-center justify-center gap-1.5 sm:gap-2">
                                 {mounted && [
                                     { value: countdown.days, label: "J" },
                                     { value: countdown.hours, label: "H" },
@@ -212,9 +212,9 @@ export default function SignInPage() {
                                     { value: countdown.seconds, label: "S" },
                                 ].map((item, i) => (
                                     <React.Fragment key={item.label}>
-                                        {i > 0 && <span className="text-lg font-bold text-blue-400">:</span>}
-                                        <div className="w-12 h-12 rounded-xl bg-white/80 backdrop-blur-sm border border-blue-200/60 shadow flex items-center justify-center">
-                                            <span className="text-xl font-black text-blue-700 tabular-nums">
+                                        {i > 0 && <span className="text-base sm:text-lg font-bold text-blue-400">:</span>}
+                                        <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/40 backdrop-blur-sm border border-blue-200/30 shadow flex items-center justify-center">
+                                            <span className="text-base sm:text-xl font-black text-blue-700 tabular-nums">
                                                 {String(item.value).padStart(2, "0")}
                                             </span>
                                         </div>
@@ -225,8 +225,8 @@ export default function SignInPage() {
                     </div>
 
                     {/* Mascot - desktop only (hidden on mobile since it's in the block above) */}
-                    <div className="hidden lg:flex justify-center mb-3 animate-bounce-gentle">
-                        <div className="relative w-28 h-36">
+                    <div className="hidden lg:flex justify-center mb-2 xl:mb-3 animate-bounce-gentle">
+                        <div className="relative w-20 h-28 xl:w-28 xl:h-36">
                             <Image
                                 src="/images/1.png"
                                 alt="Mascotte 1111"
@@ -238,22 +238,22 @@ export default function SignInPage() {
                     </div>
 
                     {/* Floating form card */}
-                    <div className="rounded-3xl bg-white/70 backdrop-blur-xl p-6 shadow-2xl shadow-blue-900/10 border border-white/50 hover:shadow-blue-900/15 transition-shadow duration-500">
+                    <div className="rounded-2xl sm:rounded-3xl bg-white/35 backdrop-blur-lg p-4 sm:p-5 md:p-6 shadow-2xl shadow-blue-900/10 border border-white/25 hover:shadow-blue-900/15 transition-shadow duration-500">
                         {/* Header */}
-                        <div className="mb-4 text-center">
-                            <div className="lg:hidden flex justify-center mb-3">
+                        <div className="mb-3 sm:mb-4 text-center">
+                            <div className="lg:hidden flex justify-center mb-2 sm:mb-3">
                                 <Image
                                     src="/images/Logo 1111.svg"
                                     alt="1111.tn"
                                     width={100}
                                     height={36}
-                                    className="h-9 w-auto object-contain"
+                                    className="h-7 sm:h-9 w-auto object-contain"
                                 />
                             </div>
-                            <h1 className="mb-1.5 text-2xl font-extrabold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
+                            <h1 className="mb-1 sm:mb-1.5 text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent">
                                 Bienvenue à 1111
                             </h1>
-                            <p className="text-sm text-slate-500">
+                            <p className="text-xs sm:text-sm text-slate-500">
                                 Activez les alertes et suivez les prix en temps réel.
                             </p>
                         </div>
@@ -271,10 +271,10 @@ export default function SignInPage() {
                         )}
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 sm:space-y-3">
                             {/* Email */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="email" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1 sm:space-y-1.5">
+                                <label htmlFor="email" className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">
                                     Email
                                 </label>
                                 <input
@@ -282,14 +282,14 @@ export default function SignInPage() {
                                     type="email"
                                     {...register("email")}
                                     placeholder="vous@exemple.com"
-                                    className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-2.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                    className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 sm:px-4 py-2 sm:py-2.5 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                 />
                                 {errors.email && <span className="text-xs text-red-500 font-medium">{errors.email.message}</span>}
                             </div>
 
                             {/* Password */}
-                            <div className="space-y-1.5">
-                                <label htmlFor="password" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                            <div className="space-y-1 sm:space-y-1.5">
+                                <label htmlFor="password" className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">
                                     Mot de passe
                                 </label>
                                 <div className="relative">
@@ -298,7 +298,7 @@ export default function SignInPage() {
                                         type={showPassword ? "text" : "password"}
                                         {...register("password")}
                                         placeholder="Votre mot de passe"
-                                        className="w-full rounded-xl border-2 border-slate-200/80 bg-white/60 backdrop-blur-sm px-4 py-2.5 pr-12 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:bg-white placeholder:text-slate-300"
+                                        className="w-full rounded-xl border-2 border-slate-200/40 bg-white/30 backdrop-blur-sm px-3 sm:px-4 py-2 sm:py-2.5 pr-10 sm:pr-12 text-sm outline-none transition-all duration-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/50 focus:bg-white/50 placeholder:text-slate-400"
                                     />
                                     <button
                                         type="button"
@@ -325,7 +325,7 @@ export default function SignInPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+                                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 py-2 sm:py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
                             >
                                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin inline" /> : null}
                                 {isLoading ? "Connexion..." : "Se connecter"}
@@ -333,7 +333,7 @@ export default function SignInPage() {
                         </form>
 
                         {/* Divider */}
-                        <div className="my-4 flex items-center gap-4">
+                        <div className="my-3 sm:my-4 flex items-center gap-3 sm:gap-4">
                             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
                             <span className="text-xs font-medium text-slate-400">ou</span>
                             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
@@ -343,7 +343,7 @@ export default function SignInPage() {
                         <GoogleAuthButton />
 
                         {/* Sign Up Link */}
-                        <p className="mt-4 text-center text-sm text-slate-500">
+                        <p className="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-slate-500">
                             Vous n{"'"}avez pas de compte?{" "}
                             <Link href="/signup" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
                                 Inscrivez-vous.
