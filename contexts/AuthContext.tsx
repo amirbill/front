@@ -54,8 +54,8 @@ export const AuthProvider = ({ children, initialUser }: { children: React.ReactN
     const signup = async (data: any) => {
         const response = await signupAction(data);
         if (response.success) {
-            // Redirect to signin page after successful signup
-            router.push('/signin');
+            // Redirect to verification page so user can enter the code sent to their email
+            router.push(`/verify?email=${encodeURIComponent(data.email)}`);
         } else {
             throw new Error(response.error || 'Signup failed');
         }
