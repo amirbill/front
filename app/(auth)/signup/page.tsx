@@ -87,6 +87,9 @@ export default function SignUpPage() {
                 email: data.email,
                 password: data.password,
                 role: "client",
+                full_name: data.name,
+                phone: data.phone,
+                address: data.address,
             })
             setSuccess(true)
             reset()
